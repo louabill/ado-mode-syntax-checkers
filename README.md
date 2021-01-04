@@ -1,7 +1,7 @@
 ## Ado-mode syntax testers
 
 Here live the syntax-testers for `ado-mode`, which can be found at
-[https://github.com/louabill/ado-mode](https://github.com/louabill/ado-mode).
+https://github.com/louabill/ado-mode .
 `ado-mode` is an Emacs major mode for editing Stata-related files.
 
 The files fulfill a couple of purposes:
