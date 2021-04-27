@@ -1,4 +1,4 @@
-*! version 1.15.0.1 December 18, 2020 @ 09:59:34
+*! version 1.15.0.1 January 12, 2021 @ 22:06:08
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8774,8 +8774,10 @@ versio 23: howdy // should show as blace for a few years
    `boo%ha'
    `boo_ha'
 
-   The command smcl2do is user-written, so it will not highlight if you do not have
-   it installed, but is will highlight otherwise (no easy way to fix efficiently)
+   /* The command smcl2do is user-written, so it will not highlight
+   if you do not have it installed, but is will highlight otherwise
+   (no easy way to fix efficiently) */
+   
    smcl2do
    // end ignore block
 
