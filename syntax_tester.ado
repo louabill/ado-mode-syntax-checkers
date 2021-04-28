@@ -1,4 +1,4 @@
-*! version 1.15.0.1 January 12, 2021 @ 22:06:08
+*! version 1.17.0.0 April 28, 2021 @ 14:33:05
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -87,7 +87,10 @@ version 15.2 // bad
 version 16   //
 version 16.1
 version 16.2 // bad
-version 17   // bad
+version 17
+version 17.0
+version 17.1 // bad
+version 18   // bad
 version 20   // bad for awhile
 version 44   // bad for multiple generations
 
@@ -106,7 +109,8 @@ version 44   // bad for multiple generations
    _coef[bleen]
    _se[freeble]
 
-   /* first... [R] the general reference manuals */
+   /* [R] the general reference manuals
+       not first in the list of manuals but first in concept */
    about
    adjust // obsolete in Stata 11
    adoupdate // obsolete in Stata 16
@@ -126,7 +130,8 @@ version 44   // bad for multiple generations
    betareg               // new in Stata 14
    binreg
    biprobit
-   bitest bitesti
+   bitest
+   bitesti
    bootstrap
    boxcox
    brier
@@ -184,22 +189,32 @@ version 44   // bad for multiple generations
    // the copyright commands all go to the same help file
    //    because -copyright- runs -help copyright- and nothing else
    //   so -copyright foo- works...
-   //  No new subcommands added as of Stata 16
-   //   leaving what is here for past compatability only
+   //  Starting in Stata 17, capitalization changed
+   //   this is ignored, since any subcommand will work
+   //   obsolete versions left as OK, also
    copyright             // subcommands new in Stata 14
    copyright apache
    copyright autolink    // new in Stata 15
    copyright boost
    copyright flexmark    // new in Stata 15
    copyright hamcrest    // new in Stata 15
-   copyright icd10
+   copyright h2o         // new in Stata 17 
+   copyright icd10       // obsolete in Stata 17 
+   copyright icd-10      // new in Stata 17 
    copyright icu
+   copyright jaxb        // new in Stata 17
+   copyright jgoodies common // new in Stata 17
+   copyright jgoodies forms // new in Stata 17
+   copyright json        // new in Stata 17 
    copyright jsoup       // new in Stata 15
    copyright lapack
    copyright libharu
    copyright libpng
    copyright mersennetwister
-   copyright miglayout
+   copyright mig layout  // new in Stata 17 
+   copyright miglayout   // obsolete in Stata 17
+   copyright parsington  // new in Stata 17
+   copyright readstat    // new in Stata 17 
    copyright scintilla
    copyright slf4j       // new in Stata 15
    copyright ttf2pt1
@@ -340,8 +355,8 @@ version 44   // bad for multiple generations
    estimates stats
    // once again: highlight because -estimates- allows 0 subcommands
    // estimates change is not in Stata 11
-   estim ch // highlights -ch- as obsolete because of -chelp-'s demise
-   estima change
+   estim ch // bad
+   estima change // bad
    /* end estimates */
    e // dumb abbreviation
    ex
@@ -394,6 +409,7 @@ version 44   // bad for multiple generations
    heckoprobit
    heckpoisson           // new in Stata 15
    heckprob // synonym for heckprobit (ugh) in Stata 14
+   heckprobi // bad
    heckprobit
 
    h
@@ -408,7 +424,7 @@ version 44   // bad for multiple generations
    hetprobit
    hetprob // synonym for hetprobit in Stata 14
    hetregress            // new in Stata 15
-   hist
+   hist     // abbrev undocumented in Stata 17
    histogram
    hsearch // obsolete in Stata 12
 
@@ -462,6 +478,7 @@ version 44   // bad for multiple generations
    log close
    log of
    log off
+   log on
    log using
    cmdlog
    cmdlog c
@@ -498,7 +515,7 @@ version 44   // bad for multiple generations
    set mat       // obsolete in Stata 16 
    set matsize   // obsolete in Stata 16 
 
-   // inside 'maximize' help
+   // inside 'maximize' help (not as of Stata 17, at least)
    set maxiter
 
    mean
@@ -573,7 +590,7 @@ version 44   // bad for multiple generations
    ml mlout
    // end obsolete block
 * etc
-   // these are 
+   // these are subroutines
    mleval
    mlsum
    mlvecsum
@@ -619,6 +636,7 @@ version 44   // bad for multiple generations
    net stb
    ado
    ado dir
+   ado di  // bad, but highlights because -ado- is OK
    ado d
    ado describe
    ado update    // new in Stata 16 
@@ -637,8 +655,6 @@ version 44   // bad for multiple generations
    set httpproxyauth off
    set httpproxyuser
    set httpproxypw
-   set timeout1
-   set timeout2
 
    news
 
@@ -692,8 +708,8 @@ version 44   // bad for multiple generations
    predict
    predictnl
 
-   prob    // abbrev obsolete in Stata 16 
-   probi   // abbrev obsolete in Stata 16 
+   prob    // abbrev undocumented in Stata 16 
+   probi   // abbrev undocumented in Stata 16 
    probit
 
    dprobit // obsolete in Stata 11
@@ -731,20 +747,23 @@ version 44   // bad for multiple generations
    query interface
    query graph
    query graphics
-   query eff
-   query efficiency
+   query eff          // undocumented in Stata 16 
+   query efficiency   // undocumented in Stata 16 
    quer net
    que network
-
    query up
    query update
+
    qu trace
    q mata
-   que java       // new in Stata 16 
+   que java       // new in Stata 16
+   qu lapack      // new in Stata 17 
    qu putdocx     // new partway into Stata 16
    quer python    // new in Stata 16
-   query random   // new in Stata 16 
-   que unicode  // new in Stata 14 
+   query random   // new in Stata 16, obsolete in Stata 17
+   query rng      // new in Stata 17
+   query sort     // new in Stata 17 
+   que unicode  // new in Stata 14
    q oth
    q other
    query `foo'
@@ -759,15 +778,14 @@ version 44   // bad for multiple generations
    regress : regress : regress
    regress a b, vce(robust) 
 
-   reg       // abbrev obsolete in Stata 16 
-   regr      // abbrev obsolete in Stata 16 
-   regre     // abbrev obsolete in Stata 16 
-   regres    // abbrev obsolete in Stata 16 
+   reg       // abbrev undocumented in Stata 16 
+   regr      // abbrev undocumented in Stata 16 
+   regre     // abbrev undocumented in Stata 16 
+   regres    // abbrev undocumented in Stata 16 
    regress
 
    // regress postestimation left out on purpose here
 
-   // !! fix me? 
    #r
    #re
    #rev
@@ -775,9 +793,7 @@ version 44   // bad for multiple generations
    #revie
    #review
 
-   /* _rmcoll in [P] _huber obsolete */
-   _rmcoll
-   _huber
+   _huber    // obsolete since at least Stata 11
 
    /* following manual rather than short entry */
    roccomp
@@ -828,8 +844,8 @@ version 44   // bad for multiple generations
    set charset latin1  // // obsolete in Stata 14
 
    set checksum // incomplete
-   set checksum on
-   set checksum off
+   set checksum on   // undocumented in Stata 17 
+   set checksum off  // undocumented in Stata 17 
 
    set clevel // new in Stata 14
 
@@ -871,19 +887,21 @@ version 44   // bad for multiple generations
    set dockable on
    set dockable off
 
-   // not in Stata 16 manuals
+   // undocumented starting in Stata 16
    set dockingg
    set dockingg on
    set dockingguides off
 
    // added partway into Stata 16
    set docx_hardbreak
-   set docx_hardbreak on   
+   set docx_hardbreak on
+   set docx_hardbreak off
    set docx_paramode
+   set docx_paramode on
    set docx_paramode off
    set dots
    set dots on
-
+   set dots off
 
    set doublebuffer
    set doublebuffer on
@@ -979,6 +997,17 @@ version 44   // bad for multiple generations
    // new in Stata 16 
    set java_heapmax
    set java_home
+
+   // set lapack* new in Stata 17
+   set lapack_mkl on
+   set lapack_mkl off
+   set lapack_mkl foo // bad
+
+   set lapack_mkl_cnr default
+   set lapack_mkl_cnr auto
+   set lapack_mkl_cnr compatible
+   set lapack_mkl_cnr off
+   set lapack_mkl_cnr on // bad
 
    set l
    set level
@@ -1147,7 +1176,6 @@ version 44   // bad for multiple generations
    set sformat // added in Stata 11.1 
 
    set showbaselevels // incomplete 
-
    set showbaselevels on
    set showbaselevels off
    set showbaselevels all
@@ -1168,6 +1196,16 @@ version 44   // bad for multiple generations
 
    set smoothsize 12 // looks to be obsolete in Stata 12
 
+   // new in Stata 17 
+   set sortmethod default
+   set sortmethod fsort
+   set sortmethod qsort
+   set sortmethod asort //bad
+
+   // new in Stata 17
+   set sortrngstate
+
+   // undocumented in Stata 17, but still functional[?] 
    set timeout1
    set timeout2
 
@@ -1246,8 +1284,8 @@ set trace off
    set_defaults interface
    set_defaults graph
    set_defaults graphics
-   set_defaults eff
-   set_defaults efficiency
+   set_defaults eff         // undocumented in Stata 17 
+   set_defaults efficiency  // undocumented in Stata 17 
    set_defaults net
    set_defaults network
    set_defaults up
@@ -1339,7 +1377,7 @@ set trace off
    ereturn list
    sretu         // incomplete 
    sret li
-   sret list
+   sreturn list
 
    suest 
 
@@ -1381,6 +1419,7 @@ set trace off
    te
    tes
    test
+   testp // bad
    testparm
 
    testnl
@@ -1447,7 +1486,7 @@ set trace off
    view net
    view ado
    view update
-   // the _d variants still work in Stata 13, but are undocumented !! (come back)
+   // the _d variants still work in Stata 13, but are undocumented
    view view_d
    view help_d
    view search_d
@@ -1462,6 +1501,8 @@ set trace off
    xi
 
    zinb
+
+   ziologit  // new in Stata 17
 
    zioprobit // new in Stata 15
 
@@ -1517,7 +1558,9 @@ set trace off
 
    // estat (from [R])
    // (some) obsolete versions included for testing
-   // best way to check is look in the index
+   // best way to check is look in the index, but the index
+   // insanely sorts by the [short volume name]
+   // !! put this in index section and reorder???
    estat alt
    estat alternatives  // asclogit ascprobit asroprobit nlogit
    archlm // obsolete in Stata 9 
@@ -1584,7 +1627,7 @@ set trace off
    /* no good mechanism for prefix commands....*/
    bayes: regress
 
-   /* from Bayes manual [BAYES]; all initially introduced in Stata 14 */
+   /* was the bayes prefix from Stata 14 */
    bayesmh
 
    // Bayesian postestimation not separated out here, because all commands
@@ -1593,10 +1636,11 @@ set trace off
    bayesgraph
    bayesgraph matrix
    /* no special highlighting yet */
-   /*   no special highlighting from here out for _all */
+   // oops.... this never should have been highlighted
    bayesgraph name _all
 
    bayesstats // incomplete
+   
 
    bayesstats ess
    bayesstats ess _all
@@ -1613,7 +1657,8 @@ set trace off
    bayesstats summ
    bayesstats summary
    bayesstats sum _all // bad (sum too short)
-   bayesstats summary _loglikelihood // ok
+   bayesstats summary _loglikelihood
+   bayesstats summary _logposterior
 
    bayestest // incomplete
 
@@ -1630,6 +1675,7 @@ set trace off
    set clevel
 
    // using bayes: as a prefix; not putting it in with each possible command
+   /* end [BAYES] manual */
 
    /* [CM] Choice models */
    // manual new in Stata 16
@@ -1657,11 +1703,15 @@ set trace off
 
    cmxtmixlogit
 
+   margins  // shows up in manual, here
+
    nlogit
    nlogitgen
    nlogittree
    estat alt
    estat alternatives
+
+   /* end [CM] manual */
 
 
    /* from [D] data management manual */
@@ -1685,6 +1735,7 @@ set trace off
    bcal ch
    bcal check
    bcal dir
+   bcal di // bad
    bcal d
    bcal describe
    bcal load
@@ -1704,8 +1755,8 @@ set trace off
    changeeol
 
    checksum
-   se checksum on
-   set checksum off
+   se checksum on    // undocumented in Stata 17 
+   set checksum off  // undocumented in Stata 17 
 
    clear
    clear mata
@@ -1715,7 +1766,8 @@ set trace off
    clear ado
    clear all
    clear rngstream  // new in Stata 15
-   clear frames     // new in Stata 16 
+   clear frames     // new in Stata 16
+   clear collect    // new in Stata 17
    clear * // bad but works; cannot fix easily, because of special meaning of * in regexps
 
    clonevar
@@ -1753,6 +1805,7 @@ set trace off
    datasig
    datasignature
    datasig set
+   datasignature set
    datasignature conf
    datasign confirm
    datasigna rep
@@ -1761,6 +1814,7 @@ set trace off
    datasig repo using
    datasignature clear
    /* should there be date format highlighting? */
+   // !! nothing about biz calendar files....
    /* date-time functions are in the functions */
 
    d
@@ -1801,7 +1855,6 @@ set trace off
    dyngen {  // new in Stata 16
       update   // syntax conflict with -update- as a plain old command. yay.
       }
-
 
    ed
    edi
@@ -1945,13 +1998,16 @@ set trace off
    frame put
 
    frame
-   frames
+   frames  // works but is undocumented
    frame pwf
    pwf
 
    frame rename
 
    frames dir   // ugh, now there is a plural
+
+   frames reset // no sure why this is not -frames clear-, maybe because
+                // of clear frames?
 
    frget   // why not frame get??
 
@@ -1975,6 +2031,7 @@ set trace off
    set ty  // incomplete 
    set ty float
    set type double
+   set type byte // bad
    set type foo // bad
 
    gsort
@@ -2060,7 +2117,7 @@ set trace off
 
    import hav
    import haver
-   // igit... there is no exporting of haver analytics files!
+   // there is no exporting of haver analytics files!
    export hav
    export haver
    set haverdir "/whatever"
@@ -2102,6 +2159,23 @@ set trace off
 
    isid
 
+   // jdbc commands, new in Stata 17
+   // perhaps some should be harmful?!
+   jdbc conn
+   jdbc connect
+   jdbc add
+   jdbc remove
+   jdbc list
+   jdbc showd
+   jdbc showdbs
+   jdbc show
+   jdbc showtables
+   jdbc des
+   jdbc describe
+   jdbc load
+   jdbc insert
+   jdbc exec
+
    joinby
 
    /* label */
@@ -2138,7 +2212,6 @@ set trace off
    li
    lis
    list
-   // flist in help but not in manuals
    fl
    fli
    flis
@@ -2402,6 +2475,8 @@ set trace off
    irf
 
    dsgenl
+
+   estat transition
 
    /* end [DSGE] DSGE manual (that was quick) */
 
