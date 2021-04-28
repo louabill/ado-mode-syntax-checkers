@@ -1,4 +1,4 @@
-*! version 1.17.0.0 April 28, 2021 @ 14:33:05
+*! version 1.17.0.0 April 28, 2021 @ 15:27:01
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -2484,11 +2484,14 @@ set trace off
    // New manual in Stata 15
 
    eintreg
+   xteintreg
 
    eoprobit
+   xteoprobit
 
    eprobit
-
+   xteprobit
+   
    eregress
    xteregress
 
@@ -2499,13 +2502,13 @@ set trace off
    /* begin [FMM] finite mixture models */
    // New manual in Stata 15
 
-
    fmm 3:  // incomplete, but good enough
 
    // highlighting changed to be less informative in 1.16.0.0
-   // done because there are too many prefix options to get the hilighting to be good
+   // done because there are too many prefix options
+   //   to get the hilighting to be good
    fmm 1: betareg
-   fmm 2, vce(robust): betareg // !! should do better; instead will dump speacial
+   fmm 2, vce(robust): betareg // !! should do better; instead will dump special
    fmm 2: cloglog
    fmm 3: glm
    fmm 15: intreg
@@ -2539,11 +2542,21 @@ set trace off
    /* functions (moved to their own manual in Stata 14 */
    /*  order changed to match split order in Stata 14 manual */
    /* date functions */
+   // Many new functions in Stata 17
+   age()       // new in Stata 17
+   age_frac()  // new in Stata 17
+   birthday()  // new in Stata 17 
    bofd()
    Cdhms()
    Chms()
    Clock()
    clock()
+   Clockdiff()  // new in Stata 17 
+   clockdiff()  // new in Stata 17
+   Clockdiff_frac()  // new in Stata 17
+   clockdiff_frac()  // new in Stata 17
+   Clockpart() // new in Stata 17
+   clockpart() // new in Stata 17
    Cmdyhms()
    Cofc()
    cofC()
@@ -2551,7 +2564,11 @@ set trace off
    cofd()
    daily() 
    date()
+   datediff()      // new in Stata 17  @@
+   datediff_frac() // new in Stata 17
+   datepart()      // new in Stata 17
    day()
+   daysinmonth()   // new in Stata 17
    dhms()
    dofb()
    dofC()
@@ -2563,6 +2580,7 @@ set trace off
    dofy()
    dow()
    doy()
+   firstdayofmonth() // new in Stata 17
    halfyear()
    halfyearly()
    hh()
@@ -2570,6 +2588,9 @@ set trace off
    hms()
    hofd()
    hours()
+   isleapsecond()   // new in Stata 17 
+   isleapyear()     // new in Stata 17 
+   lastdayofmonth() // new in Stata 17 
    mdy()
    mdyhms()
    minutes()
@@ -2581,6 +2602,11 @@ set trace off
    msofhours()
    msofminutes()
    msofseconds()
+   nextbirthday()     // new in Stata 17
+   nextleapyear()     // new in Stata 17
+   now()              // new in Stata 17
+   previousbirthday() // new in Stata 17
+   previousleapyear() // new in Stata 17
    qofd()
    quarter()
    quarterly()
@@ -2592,6 +2618,7 @@ set trace off
    td()
    th()
    tm()
+   today()  // new in Stata 17
    tq()
    tw()
    week()
@@ -2651,6 +2678,8 @@ set trace off
    trunc()
    /* matrix functions (whether matrix or scalar result) */
    // those returning matrices (to match new ordering)
+   // dang, now in Stata 17, there is one in alphabetical order and one
+   //   split... going by the split order
    cholesky()
    corr()
    diag()
@@ -2755,13 +2784,14 @@ set trace off
    tin()
    twithin()
 
-
    /* so-called statistical functions, most of which are probability functions */
    /* beta density */
    betaden()
    ibeta()
    ibetatail()
    invibeta()
+   invibetatail()
+   nbetaden()
    nibeta()
    invnibeta()
 
@@ -2826,7 +2856,7 @@ set trace off
    invgammap()
    invgammaptail()
 
-   // dgamma & lnigamma
+   // dgamma & lnigamma, now under gamma
    dgammapda()
    dgammapdada()
    dgammapdadx()
@@ -2923,9 +2953,11 @@ set trace off
    lnwishartden()
    lniwishartden()
 
-   /* string functions */ 
+   /* string functions */
+   // order changed again with unicode sprinkled in ascii
    abbrev()
    char()
+   uchar()
    collatorlocale() // new in Stata 14 
    collatorversion() // new in Stata 14 
    index()
@@ -2941,6 +2973,10 @@ set trace off
    regexm()
    regexr()
    regexs()
+   ustrregexm()
+   ustrregexrf()
+   ustrregexra()
+   ustrregexs()
    reverse() // obsolete in Stata 14 
    rtrim()   // obsolete in Stata 14 
    soundex()
@@ -2948,30 +2984,67 @@ set trace off
    strcat() // bad; fake entry in manual
    strdup() // bad; fake entry in manual
    string()
-   // new in Stata 14: -str- prefix for many string functions 
+   // new in Stata 14: -str- prefix for many string functions
+   //  now in Stata 17 docs: ustr together with str
    stritrim() 
    strlen()
-   strlower() 
-   strltrim() 
+   ustrlen()
+   udstrlen()
+   strlower()
+   ustrlower()
+   strltrim()
+   ustrltrim()
    strmatch() 
    strofreal() 
-   strpos() 
-   strproper() 
+   strpos()
+   ustrpos()
+   strproper()
+   ustrtitle()
    strreverse()
+   ustrreverse()
    strrpos()
-   strrtrim() 
+   ustrrpos()
+   strrtrim()
+   ustrrtrim()
    strtoname()
+   ustrtoname()
    strtrim()
+   ustrtrim()
    strupper()
+   ustrupper()
    // end of new Stata 14 -str- functions
    subinstr()
+   usubinstr()
    subinword()
    substr()
+   usubstr()
+   udsubstr()
    tobytes()  // new in Stata 14 
    trim()  // obsolete in Stata 14
-
+   uisdigit()
+   uisletter()
+   ustrcompare()
+   ustrcompareex()
+   ustrfix()
+   ustrfrom()
+   ustrinvalidcnt()
+   ustrleft()
+   ustrnormalize()
+   ustrright()
+   ustrsortkey()
+   ustrsortkeyex()
+   ustrto()
+   ustrtohex()
+   ustrunescape()
+   word()
+   ustrword()
+   wordbreaklocale()
+   wordcount()
+   ustrwordcount()
    // new in Stata 14: -u- prefix functions for unicode
 
+   // the unicode functions (again); left here in case order in
+   //   documentation changes again
    uchar()
    udstrlen()
    uisdigit()
@@ -3014,6 +3087,7 @@ set trace off
    wordbreaklocale()
    wordcount()
 
+   @@
    /* trig split from math in Stata 14, because trig must not be math */
    acos()
    acosh()
