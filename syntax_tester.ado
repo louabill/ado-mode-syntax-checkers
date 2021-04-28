@@ -1,4 +1,4 @@
-*! version 1.17.0.0 April 28, 2021 @ 15:27:01
+*! version 1.17.0.0 April 28, 2021 @ 15:45:49
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -3087,7 +3087,6 @@ set trace off
    wordbreaklocale()
    wordcount()
 
-   @@
    /* trig split from math in Stata 14, because trig must not be math */
    acos()
    acosh()
@@ -3198,6 +3197,13 @@ set trace off
    irf graph
    irf ograph
    irf cgraph
+   // !! Check after working through bayes var stuff
+   // bayes... VAR new in Stata 17
+   bayesfcast graph
+   bayesvarstable
+   bayesirf graph
+   bayesirf ograph
+   abyesirf cgraph
 
    xtline
 
@@ -3207,6 +3213,7 @@ set trace off
    stci
    stphtest  // obsolete in Stata 9
    stphplot
+   stintphplot // !! new in Stata 17
    stcoxkm
    estat phtest
    stcurve
@@ -3215,6 +3222,7 @@ set trace off
    // new in Stata 16
    meta forestplot
    meta funnelplot
+   meta galbraith // !! new in Stata 17 
    meta labbeplot
    estat bubbleplot
 
@@ -3225,9 +3233,10 @@ set trace off
    lroc
    lsens
 
-   // new in Stata 16
-   coefpath
-   cvplot
+
+   bicplot  // !! new in Stata 17 
+   coefpath // new in Stata 16
+   cvplot   // new in Stata 16
 
    irtgraph icc
    irtgraph tcc
@@ -3260,9 +3269,12 @@ set trace off
    power, graph // incomplete
    ciwidth, graph // !! incomplete, new in Stata 16 
    tabodds
-   teffects overlap
+   teffects overlap // obsolete in Stata 17 (changed to teoverlap)
+   teoverlap // new in Stata 17
    tebalance box
    npgraph
+   fp plot
+   fracplot
    grmap
    pkexamine
 
@@ -3295,7 +3307,7 @@ set trace off
    graph set window fontfaceserif
    graph set window fontfacesymbol
 
-   // should the twoway's here be changed to command highlighting?
+   // @@ should the twoway's here be changed to command highlighting?
    gr twoway fee fie fo
    graph twoway (scatter bar foo) (lfitci bar fee) // should lfitci be a command?
    twoway bar foo || bar fee
