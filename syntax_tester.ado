@@ -1,4 +1,4 @@
-*! version 1.17.0.0 April 28, 2021 @ 15:45:49
+*! version 1.17.0.0 April 29, 2021 @ 10:34:53
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -3307,7 +3307,7 @@ set trace off
    graph set window fontfaceserif
    graph set window fontfacesymbol
 
-   // @@ should the twoway's here be changed to command highlighting?
+   // should the twoway's here be changed to command highlighting?
    gr twoway fee fie fo
    graph twoway (scatter bar foo) (lfitci bar fee) // should lfitci be a command?
    twoway bar foo || bar fee
@@ -3340,7 +3340,7 @@ set trace off
 
    graph twoway dropline y
 
-   gr twoway fp // should not be light blue (and is not)
+   gr twoway fp // fp should not be light blue (and is not)
    graph twoway fpfit y
 
    graph twoway fpfitci y
@@ -3348,6 +3348,7 @@ set trace off
    graph twoway function y
 
    graph twoway hist
+   twow histog   // here, hist really is an abbreviation
    tw histogram
 
    graph twoway kdensity
@@ -3374,7 +3375,7 @@ set trace off
    twoway pcbarrow
 
    two pcarrowi
-   tw pcbarrowi // bad; turns out this never existed
+   tw pcbarrowi // bad, for some odd reason
 
    two pccapsym
 
@@ -3410,6 +3411,7 @@ set trace off
 
    graph tw scatter
    two sc
+   sc
    scat
 
    graph twowa scatteri
