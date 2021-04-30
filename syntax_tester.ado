@@ -1,4 +1,4 @@
-*! version 1.17.0.0 April 29, 2021 @ 10:34:53
+*! version 1.17.0.0 April 29, 2021 @ 22:18:59
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -17,10 +17,11 @@ program def syntax_tester, eclass
    pr droop foo // bad, but highlights anyways because define is optional
    end
    program bleen
+      fooey
    end
+   
    pro dir
    program dir
-
 
 * a starting line comment
    14 * foobar // a non-comment
@@ -84,7 +85,7 @@ version 15
 version 15.0
 version 15.1
 version 15.2 // bad
-version 16   //
+version 16   //            
 version 16.1
 version 16.2 // bad
 version 17
@@ -99,7 +100,7 @@ version 44   // bad for multiple generations
    local  // incomplete (overridden as mata keyword)
    global // incomplete
    local dingle = this - that
-
+   
    /* stuff from incremental updates which need to be moved when new manuals come out */
    include
 
@@ -2564,7 +2565,7 @@ set trace off
    cofd()
    daily() 
    date()
-   datediff()      // new in Stata 17  @@
+   datediff()      // new in Stata 17
    datediff_frac() // new in Stata 17
    datepart()      // new in Stata 17
    day()
@@ -3458,8 +3459,9 @@ set trace off
    /* end [G] manual */
 
    /* [IRT] manual (new in Stata 14) */
-   // skipping the -irt- section and putting commands in the order of the manual
-   // estimation commands all at the end for now
+   // skipping the -irt- section and following manual
+   // skipping individual post-estimation sections, since irt-specific
+   //  post estimation commands have documentation
    irt  // incomplete
    irt 1pl
    irt 2pl
@@ -3477,19 +3479,19 @@ set trace off
    irt hybrid
 
    // irt-specific postestimation commands
-   estat greport  // new in Stata 16
-   estat grep
    estat rep
    estat repo
    estat report
+   estat greport  // new in Stata 16
+   estat grep
 
    irtgraph // incomplete
 
    irtgraph icc
 
-   irtgraph iif
-
    irtgraph tcc
+
+   irtgraph iif
 
    irtgraph tif
 
@@ -3501,6 +3503,8 @@ set trace off
 
    /* start [LASSO] manual */
    // commands and manual new in Stata 16
+
+   bicplot  // new in Stata 17
 
    coefpath
 
@@ -3560,7 +3564,6 @@ set trace off
    boolean
    break /* used elsewhere */
    byte /* used elsewhere */
-
    case
    catch
    class
@@ -3568,38 +3571,41 @@ set trace off
    complex
    const // used elsewhere
    continue /* used elsewhere */
-
+   
    default
    delegate
    delete
    do /* used elsewhere */ 
    double /* used elsewhere */
-
+   
    else /* used elsewhere */
    eltypedef
-   mata
-   end /* used elsewhere, commented out here because of indentation */
+   mata 
+   end // used elsewhere
+
    enum
    explicit
    export
    external
-
+   
    float /* used elsewhere */
    for /* used elsewhere */
    friend
    function
-
+   
    global /* used elsewhere */ 
    goto
 
    if /* used elsewhere */
    inline
    int /* used elsewhere */
-
+   
    local /* used elsewhere */
    long /* used elsewhere */
 
-   mata
+   // !! BUG: without trailing space, indentation is wrong
+   // !! BUG: with comment, indentation is wrong!
+   mata 
    end  // needed for indentation here
    matrix /* used elsewhere */
 
@@ -3607,7 +3613,7 @@ set trace off
    new
    NULL
    numeric
-
+   
    operator
    orgtypedef
 
@@ -3666,44 +3672,45 @@ version /* used elsewhere */
    /* from [M-3 Intro] "commands for controlling mata" */
    lmbuild 
 
-   mata:
+   mata: // this is a comment
       this is mata code
    end
 
+   mata /// this is a continuation
+     inline command
+   // back to stata
    mata
-      this is mata code (which needs no end statement, as it really needs to be a block, I think.) Sheesh!
-      what about this
+      this is mata code
    end
-
+   
    mata: mata clear
    mata mata clear
-   mata clear
-
+   
    mata d
    mata describe
-
+   
    mata: mata drop
    mata drop
-
+   
    mata help
-
+   
    mata matsave aFile some names
    mata matuse bar
    mata matd breeble
    mata matd box
    mata matdescribe box
-
+   
    mata memory
-
+   
    mata mlib // incomplete
    mata mlib create foo
    mata mlib add bar
    mata mlib index
    mata mlib q
    mata mlib query
-
+   
    mata mosave momoney()
-
+   
    mata rename
 
    mata query
@@ -3812,7 +3819,7 @@ version /* used elsewhere */
    _rmdir()
 
    cholesky()
-   _cholesky()
+   _cholesky() @@
 
    cholinv()
    _cholinv()
@@ -5478,7 +5485,7 @@ version /* used elsewhere */
 
    /* end of [ME] manual */
 
-   // the [META] manual, new in Stata 16 @@
+   // the [META] manual, new in Stata 16
 
    meta // incomplete
 
@@ -5614,7 +5621,6 @@ version /* used elsewhere */
    mi merge m:1
    mi merge m:m
    mi merge m:2  // no good, of course
-   @@ start here
 
    mi misstab // incomplete
    mi misstab sum
