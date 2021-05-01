@@ -1,4 +1,4 @@
-*! version 1.17.0.0 April 29, 2021 @ 22:18:59
+*! version 1.17.0.0 May 1, 2021 @ 13:03:29
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -3819,13 +3819,17 @@ version /* used elsewhere */
    _rmdir()
 
    cholesky()
-   _cholesky() @@
+   _cholesky()
 
    cholinv()
    _cholinv()
+   cholinvlapacke() // new in Stata 17
+   _cholinvlapacke() // new in Stata 17  
 
    cholsolve()
    _cholsolve()
+   cholsolvelapacke()   // new in Stata 17 
+   _cholsolvelapacke()  // new in Stata 17
 
    comb()
 
@@ -3913,6 +3917,37 @@ version /* used elsewhere */
    msofminutes()
    msofseconds()
 
+   // begin new in Stata 17
+   age()
+   age_frac()
+   Clockdiff()
+   clockdiff()
+   Clockdiff_frac()
+   clockdiff_frac()
+   datediff()
+   datediff_frac()
+
+   birthday()
+   previousbirthday()
+   nextbirthday()
+
+   isleapyear()
+   previousleapyear()
+   nextleapyear()
+
+   daysinmonth()
+   firstdayofmonth()
+   lastdayofmonth()
+
+   datepart()
+   clockpart()
+   Clockpart()
+   isleapsecond()
+   today()
+   now()
+   // end new in Stata 17 
+   
+
    /* end of mata date functions */
    // start of numerical derivatives
    deriv_init()
@@ -3978,7 +4013,7 @@ version /* used elsewhere */
 
    Dmatrix()
 
-   /* the _docx*() functions */
+   /* the _docx*() functions */ @@
    // create and save
    _docx_new()
    _docx_save()
