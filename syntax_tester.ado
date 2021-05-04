@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 4, 2021 @ 12:01:46
+*! version 1.17.0.0 May 4, 2021 @ 12:14:06
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -5523,9 +5523,6 @@ version /* used elsewhere */
 
    metobit // new in Stata 15 
 
-   stcurve
-   estat group
-
    mixed
    estat df // new in Stata 14 
    estat group
@@ -5560,6 +5557,9 @@ version /* used elsewhere */
    meta sum
    meta summarize
 
+   meta galbr           // new in Stata 17 
+   meta galbraithplot   // new in Stata 17 
+
    meta labbe
    meta labbeplot
 
@@ -5576,6 +5576,17 @@ version /* used elsewhere */
 
    meta trim
    meta trimfill
+
+   meta mvreg       // new in Stata 17
+   meta mvregress   // new in Stata 17
+
+   estat het            // new in Stata 17 
+   estat heterogeneity  // new in Stata 17
+
+   estat recov
+   estat recovariance
+
+   estat sd
 
    // end of the [META] manual
 
