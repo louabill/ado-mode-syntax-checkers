@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 1, 2021 @ 13:03:29
+*! version 1.17.0.0 May 4, 2021 @ 12:01:46
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -4013,7 +4013,7 @@ version /* used elsewhere */
 
    Dmatrix()
 
-   /* the _docx*() functions */ @@
+   /* the _docx*() functions */
    // create and save
    _docx_new()
    _docx_save()
@@ -4127,8 +4127,8 @@ version /* used elsewhere */
 
    factorial()
    lnfactorial() /* already regular function */
-   gamma()
    lngamma() /* already regular function */
+   gamma()
    digamma() /* already regular function */
    trigamma() /* already regular function */
 
@@ -4388,6 +4388,7 @@ version /* used elsewhere */
    luinv()
    _luinv()
    _luinv_la()
+   _luinv_lapacke()  // new in Stata 17
 
    lusolve()
    _lusolve()
@@ -4560,6 +4561,7 @@ version /* used elsewhere */
 
    /* mostly regular stata functions */
    norm()
+
    // normal
    normalden()
    normal()
@@ -4775,6 +4777,8 @@ version /* used elsewhere */
    panelsubmatrix()
    panelsubview()
 
+   panelsum()  // first in pdf docs in Stata 17 ugh, this documentation
+
    pathjoin()
    pathsplit()
    pathbasename()
@@ -4792,10 +4796,11 @@ version /* used elsewhere */
 
    // Pdf* functions (new in Stata 14)
    PdfDocument()
-   // uh oh... class methods
+   // uh oh... class methods not explicitly shown as class methods in the docs
    p.save()
    p.close()
    p.setPageSize()
+   p.setLandscape()  // new in Stata 15
    p.setMargins()
    p.setHAlignment()
    p.setLineSpace()
@@ -4928,7 +4933,9 @@ version /* used elsewhere */
    quadcrossdev()
 
    // Quadrature fun, new in Stata 16
+   // setup
    Quadrature()
+   // definition of problem
    q.setEvaluator()
    q.setLimits()
    q.setTechnique()
@@ -4944,14 +4951,19 @@ version /* used elsewhere */
    q.getAbstol()
    q.getReltol()
    q.getArgument()
+   q.getNarguments()  // new in Stata 17
    q.getTrace()
+   // integrate
    q.integrate()
+   // results
    q.value()
    q.iterations()
    q.converged()
    q.errorcode()
    q.errortext()
    q.returncode()
+   // utils
+   q.query()
 
    range()
    rangen()
@@ -5041,8 +5053,12 @@ version /* used elsewhere */
 
    solvelower()
    solveupper()
+   solvelowerlapacke()  // new in Stata 17
+   solveupperlapacke()  // new in Stata 17
    _solvelower()
    _solveupper()
+   _solvelowerlapacke() // new in Stata 17
+   _solveupperlapacke() // new in Stata 17
 
    // solvenl_... new in Stata 13
    solvenl_init()
