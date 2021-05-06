@@ -114,6 +114,33 @@ PROGRAM
    if you==nuts {
      display "stand up and scream!"
      }
+// here are functions in the -if- section for the dialogs
+/*  these are class methods, so they really are attached only by a.b.whatever */
+// boolean functions coming in flow control section
+d1.isdefault()
+d1.isenabled()
+d1.isnumlist()
+d1.isvisible()
+d1.isvalidname()
+d1.isvarname()
+d1.iseq()
+d1.isneq()
+d1.isgt()
+d1.isge()
+d1.islt()
+d1.isle()
+d1.isNumlistEQ()  // new in Stata 13
+d1.isNumlistLT()  // new in Stata 13
+d1.isNumlistLE()  // new in Stata 13
+d1.isNumlistGT()  // new in Stata 13
+d1.isNumlistGE()  // new in Stata 13
+d1.isNumlistInRange()  // new in Stata 13
+d1.startswith()
+fooey.endswith()
+blooey.contains()
+fug.iseqignorecase()
+
+
    call .
    call action
    call gaction
@@ -189,33 +216,16 @@ p.settrue
 p.setfalse
 p.storeClsObjectExists
 
-@@ start p 150 of [P]
+// Child dialog methods
+create CHILD
+c.settitle
+c.setExitString
+c.OKAction
+c.setSubmitAction
+c.setExitAction
+c.create
+c.callthru
 
-/* hmm... here come some functions for dialogs only ... these really do belong in another mode */
-/*  these are class methods, so they really are attached only by a.b.whatever */
-// boolean functions coming in flow control section
-d1.isdefault()
-d1.isenabled()
-d1.isnumlist()
-d1.isvisible()
-d1.isvalidname()
-d1.isvarname()
-d1.iseq()
-d1.isneq()
-d1.isgt()
-d1.isge()
-d1.islt()
-d1.isle()
-d1.isNumlistEQ()  // new in Stata 13
-d1.isNumlistLT()  // new in Stata 13
-d1.isNumlistLE()  // new in Stata 13
-d1.isNumlistGT()  // new in Stata 13
-d1.isNumlistGE()  // new in Stata 13
-d1.isNumlistInRange()  // new in Stata 13
-d1.startswith()
-fooey.endswith()
-blooey.contains()
-fug.iseqignorecase()
 
 
 PROGRAM
