@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 5, 2021 @ 17:45:46
+*! version 1.17.0.0 May 6, 2021 @ 10:23:08
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -5880,7 +5880,7 @@ version /* used elsewhere */
    cluster renamev  // bad
    cluster renamevar
 
-   @@
+   
    discrim // this is OK because of replaying results
    /* discrim commands from the discrim intro */
    discrim knn
@@ -6057,7 +6057,8 @@ version /* used elsewhere */
 
    greigen // obsolete in Stata 9
 
-   scree // listed as synonym for -screeplot- in Stata 13 manual
+   scree // listed as synonym for -screeplot-
+   screep  // bad
    screeplot
 
    /* end of [MV] manual */
@@ -6146,6 +6147,7 @@ version /* used elsewhere */
    conf e
    confi existence
    confir new f
+   confirm fi
    confirm file
 
    conf numeric fo
@@ -6185,6 +6187,7 @@ version /* used elsewhere */
    confirm str16 var  // allowed specific string sizes
    confirm byte varia
    confirm int variab
+   confirm integer var // bad
    conf long variabl
    conf float variable
    conf double v
@@ -6211,6 +6214,8 @@ version /* used elsewhere */
    c(userversion) // new in Stata 14
    c(dyndoc_version) // new in Stata 15
    c(born_date)
+   c(edition)  // new in Stata 17
+   c(edition_real) // new in Stata 17 wtf?
    c(flavor)
    c(bit) // new in Stata 12
    c(SE)
@@ -6282,7 +6287,8 @@ version /* used elsewhere */
    c(maxvlabellen) // new in Stata 13 
 
    /* current dataset */
-   c(frame)        // new in Stata 16 
+   c(frame)        // new in Stata 16
+   c(obs_t)        // new in Stata 14, first documented in Stata 16
    c(N)
    c(k)
    c(width)
