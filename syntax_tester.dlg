@@ -35,6 +35,9 @@ VERSION 15.2
 VERSION 16.0
 VERSION 16.1
 VERSION 16.2
+VERSION 17
+VERSION 17.0
+VERSION 17.1
 VERSION 25.0
 VERSION 47
 
@@ -96,7 +99,6 @@ RESET
 MODAL
 SYNCHRONOUS_ONLY
 
-
 SCRIPT
   BEGIN
     .
@@ -124,7 +126,70 @@ PROGRAM
    stopbox stop
    stopbox note
    stopbox rusure
-  END
+
+   /* some commands */
+
+   by
+   bysort
+   put
+   varlist
+   ifexp
+   inrange
+   weight
+   beginoptions
+   option
+   optionarg
+   endoptions
+   allowxi
+   xi
+   clear
+   stata
+   stata hidden 
+   stata hidden immediate
+   stata hidden queue
+
+   clear
+   clear curstring
+   clear cmdstring
+   clear optstring
+
+END
+
+// Section 5.6 (Stata 17): Special Scripts
+// (Just specially named programs, so no highlighting
+SCRIPT PREINIT_SCRIPT
+// etc
+
+// Section 6 - member properties
+// existed since forever, but first in ado-mode with Stata 17
+// for strings
+p.setvalue
+p.setstring
+p.append
+p.tokenize
+p.tokenizeOnStr
+p.tokenizeOnChars
+p.expandNumlist
+p.storeDialogClassName
+p.storeClsArrayToQuotedStr
+
+// for doubles
+p.setvalue
+p.increment
+p.increment
+p.decrement
+p.add
+p.subtract
+p.multiply
+p.divide
+p.storeClsArraySize
+
+// for boolean
+p.settrue
+p.setfalse
+p.storeClsObjectExists
+
+@@ start p 150 of [P]
 
 /* hmm... here come some functions for dialogs only ... these really do belong in another mode */
 /*  these are class methods, so they really are attached only by a.b.whatever */
@@ -151,27 +216,6 @@ d1.startswith()
 fooey.endswith()
 blooey.contains()
 fug.iseqignorecase()
-
-/* some commands */
-
-by
-bysort
-put
-varlist
-ifexp
-inrange
-weight
-beginoptions
-option
-optionarg
-endoptions
-allowxi
-xi
-clear
-stata
-stata hidden 
-stata hidden immediate
-stata hidden queue
 
 
 PROGRAM
