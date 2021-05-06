@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 6, 2021 @ 16:17:09
+*! version 1.17.0.0 May 6, 2021 @ 16:53:21
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -7744,58 +7744,78 @@ versio 23: howdy // should show as blace for a few years
    docx2pdf
 
    /* dyndoc tags; new in Stata 15 */
+   // abbreviations are given in the descriptions
+   // the full documentations of the tags have no abbreviations
    <<dd_version:1>> // obsolete in Stata 16; change color?
    <<dd_version:2>>
+   <<dd_ver:2>>
 
    <<dd_do>>
    <</dd_do>>
    <<dd_do: qui quietly nocom nocommand noout nooutput noprom noprompt >> 
    <</dd_do>>
-   <<dd_do: nocommand >> 
+   <<dd_do: nocommand>> 
    <</dd_do>>
 
 
+   // abbreviations don't seem to exist; not sure why I put them in
    <<dd_di:>>
    <<dd_dis:>>
    <<dd_disp:>>
    <<dd_displ: %3.2f 2.3>>
    <<dd_display:>>
    <<dd_display: %4.3f 1.23>>
+   
    <<dd_doc:>>
-   <<dd_docx_display:>>
+   <<dd_docx_display: nothing highlighted here... too hard>>
 
    // for dd_graph, there are too many complicated options to bother highlighting
    <<dd_graph>> // should fail
    <<dd_graph: fooey>> // bad: fooey should not highlight
    // cannot figure out why trailing >> does not highlight, as regexp is
-   //   just like that for dd_do 
-   <<dd_graph: rep >>
-   <<dd_gr: rep >>
-   <<dd_gr: replace >>
+   //   just like that for dd_do
+   // order made to match attribute list
+   <<dd_graph: sav()>>
+   <<dd_graph: saving()>>
+   <<dd_graph: rep>>
+   <<dd_graph: replace>>
+   <<dd_graph: gr()>>
+   <<dd_graph: graphname()>>
    <<dd_gra: svg >>
    <<dd_grap: png >>
-   <<dd_graph: png pdf eps ps html markd markdown >>
-   <<dd_graph: replace >>
-   <<dd_graph:  sav() saving() alt() pdf height() gr() graphname() alt() >>
-   <<dd_graph: h() height() w() width() >>
+   <<dd_graph: pdf eps ps html markd markdown >>
+   <<dd_graph: path pathonly>>
+   <<dd_graph: alt() >>
+   <<dd_graph: h() height()>> // ugh, h leftover from old time functions
+   <<dd_graph: w() width() >>
+   <<dd_graph: rel relative>>
+   <<dd_graph: abs absolut>>
+   <<dd_graph: nourl nourlencode>>
+
+   <<dd_include>> // should fail
+   <<dd_include: fooey>>
 
    <<dd_ignore>>
    <</dd_ignore>>
    <<dd_ign  >>
    <</dd_ign>>
 
-   <<dd_include>> // should fail
-   <<dd_include: fooey>>
+   // dd_if new in Stata 16
+   <<dd_if>> // should fail
+   <<dd_if: fooey>>
+   <<dd_else>>
+   <<dd_endif>>
+   
+   <<dd_skip_if>> // should fail
+   <<dd_skip_if: fooey>>
+   <<dd_skip_else>>
+   <<dd_skip_end>>
 
    <<dd_remove>>
    <</dd_remove>>
    <<dd_remo>>
    <</dd_remov>>
-
-   <<dd_skip_if>> // should fail
-   <<dd_skip_if: fooey>>
-   <<dd_skip_else>>
-   <<dd_skip_end>>
+   // end of dynamic tags
 
    dyndoc
 
@@ -7813,6 +7833,8 @@ versio 23: howdy // should show as blace for a few years
    putdocx clear
    putdocx append
 
+   putdocx collect  // new in Stata 17 
+
    putdocx pagebreak
    putdocx sectionbreak
 
@@ -7826,6 +7848,7 @@ versio 23: howdy // should show as blace for a few years
    putdocx image
 
    putdocx table
+   putdocx describe
 
    // putexcel new in Stata 13; syntax changes don't change ado-mode
    // not sure how putexcel is a reporting command, but still....
@@ -7850,6 +7873,12 @@ versio 23: howdy // should show as blace for a few years
 
    putpdf table
    putpdf append // should fail; not legal
+   putpdf describe
+
+   set docx_hardbreak on
+   set docx_hardbreak off
+   set docx_paramode on
+   set docx_paramode off
 
    // end of [RPT] manual
 
