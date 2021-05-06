@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 6, 2021 @ 10:23:08
+*! version 1.17.0.0 May 6, 2021 @ 16:17:09
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -6336,6 +6336,10 @@ version /* used elsewhere */
    c(pformat) // new in Stata 11.1
    c(coeftabresults)  // new in Stata 13
    c(dots)  // new in Stata 16
+   c(collect_label)  // new in Stata 17 
+   c(collect_style)  // new in Stata 17 
+   c(table_style)    // new in Stata 17 
+   c(collect_warn)   // new in Stata 17 
 
    /* interface */
    c(dockable)
@@ -6374,15 +6378,17 @@ version /* used elsewhere */
    c(macgphengine) // obsolete in Stata 9 [?]
    c(piccomments)  // obsolete in Stata 9 [?]
    c(maxbezierpath)  // new in Stata 16; Mac only
+   c(min_graphsize)  // new in Stata 16 
+   c(max_graphsize)  // new in Stata 16 
 
    /* efficiency */
    // in Stata16, efficiency is no longer a section
    c(virtual)  // obsolete in Stata 12
 
    /* network */
-   c(checksum)
-   c(timeout1)
-   c(timeout2)
+   c(checksum)  // undocumented in Stata 17 
+   c(timeout1)  // undocumented in Stata 17 
+   c(timeout2)  // undocumented in Stata 17 
    c(httpproxy)
    c(httpproxyhost)
    c(httpproxyport)
@@ -6417,6 +6423,10 @@ version /* used elsewhere */
    c(java_heapmax)
    c(java_home)
 
+   /* LAPACK settings, new in Stata 17 */
+   c(lapack_mkl)
+   c(lapack_mkl_cnr)
+
    /* putdocx settings, new partway into Stata 16 */
    c(docx_hardbreak)
    c(docx_paramode)
@@ -6432,6 +6442,11 @@ version /* used elsewhere */
    c(rngstate)
    c(rngseed_mt64s)
    c(rngstream)
+
+   /* sort settings, new in Stata 17 */
+   c(sortmethod)
+   c(sort_current)
+   c(sortrngstate)
 
    /* unicode settings (new in Stata 14) */
    c(locale_ui)
@@ -6452,6 +6467,7 @@ version /* used elsewhere */
    c(odbcmgr)
    c(odbcdriver) // new sometime in Stata 14
    c(fredkey) // new in Stata 15
+   c(collect_double) // new in Stata 17 
    c(`foo')
 
    /* other (uh notsettings?) */
@@ -6463,15 +6479,16 @@ version /* used elsewhere */
    c(Wdays)
    c(Weekdays)
    c(rc)
-   "`c(pi)'" !!!
+   "`c(pi)'" 
 
    /* end of that mess */
    _datasig
    _datasignature
 
-#delimit  // should be incomplete; but doesn't show....
+#delimit
 #d cr
 #delimit ;
+   foo #delimit cr; // bad because #delimit must start line
 
    regress foo bar;
    regress
@@ -6527,7 +6544,8 @@ version /* used elsewhere */
 
 #delimit cr
 
-   /* all the dialog stuff is in syntax_tester.dlg, because the dlg stuff should really
+   /* all the dialog stuff is in syntax_tester.dlg, because the dlg stuff
+   should really
    be a separate mode ... ugh */
 
    discard
@@ -7682,8 +7700,7 @@ versio 23: howdy // should show as blace for a few years
 
    power repeated
 
-   /* new in Stata 15; strangely out of alphabetical order */
-   power oneslope
+   power oneslope // new in Stata 15 
 
    power rsq
    power rsquared
@@ -7706,10 +7723,14 @@ versio 23: howdy // should show as blace for a few years
    power logrank
 
    ciwidth
+   ciwidth usermethod // fix?
    ciwidth onemean
+   
    ciwidth twomeans
+   
    ciwidth pairedm
    ciwidth pairedmeans
+   
    ciwidth onevar
    ciwidth onevariance
 
