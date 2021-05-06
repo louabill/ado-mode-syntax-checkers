@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 4, 2021 @ 12:14:06
+*! version 1.17.0.0 May 5, 2021 @ 17:45:46
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -5729,7 +5729,7 @@ version /* used elsewhere */
    mi set flongsep
    // mi register is under mi set
    // look carefully...on one line
-   mi reg // incomplete, but regress is winning the battle here
+   mi reg // incomplete
    mi regi // incomplete
    mi reg imp
    mi regi imputed
@@ -5774,6 +5774,7 @@ version /* used elsewhere */
    biplot
 
    ca
+   cam  // not a thing
    camat
 
    cabiplot
@@ -5823,6 +5824,7 @@ version /* used elsewhere */
    cluster dend
    cluster dendrogram
    /* cluster tree is a synonym for cluster dendogram */
+   // (not in manual)
    cluster tr
    cluster tree
 
@@ -5875,9 +5877,10 @@ version /* used elsewhere */
    cluster drop
    cluster use
    cluster rename
+   cluster renamev  // bad
    cluster renamevar
 
-
+   @@
    discrim // this is OK because of replaying results
    /* discrim commands from the discrim intro */
    discrim knn
