@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 6, 2021 @ 16:53:21
+*! version 1.17.0.0 May 7, 2021 @ 12:22:44
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -7957,6 +7957,8 @@ versio 23: howdy // should show as blace for a few years
 
    estat moran
 
+   grmap // also in [SP]
+
    spbalance  // only dangerous with option
 
    spcompress // only dangerous with option
@@ -8064,6 +8066,28 @@ versio 23: howdy // should show as blace for a few years
    stfill
 
    stgen
+   // stgen functions (why not?)
+   stgen foo = ever()
+   stgen foo = never()
+   stgen foo = always()
+   stgen foo = min()
+   stgen foo = max()
+   stgen foo = when()
+   stgen foo = when0()
+   stgen foo = count()
+   stgen foo = count0()
+   stgen foo = minage()
+   stgen foo = maxage()
+   stgen foo = avgage()
+   stgen foo = nfailures()
+   stgen foo = ngaps()
+   stgen foo = gaplen()
+   stgen foo = hasgap()
+   always() // bad
+
+   stintcox     // new in Stata 17
+   stintphplot  // new in Stata 17 
+   stintcoxnp   // new in Stata 17 
 
    stintreg // new in Stata 15
    estat gofplot // new in Stata 15
@@ -8113,6 +8137,7 @@ versio 23: howdy // should show as blace for a few years
    sttocc
 
    sttoct
+
    stvary
    /* end [ST] manual */
 
