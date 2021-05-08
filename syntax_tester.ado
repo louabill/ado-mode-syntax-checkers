@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 8, 2021 @ 16:29:20
+*! version 1.17.0.0 May 8, 2021 @ 16:46:32
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8428,11 +8428,16 @@ versio 23: howdy // should show as blace for a few years
 
    set table_style <anything>
    set table_style table
-   
+   // end [TABLE]
 
    /* [TE] (new in Stata 13 */
+   didregress // new in Stata 17
+   // didregress post estimation, which is not in an -estat- section for [TE]
+   estat trendplots
+   estat ptrends
+   estat granger
+   
    eteffects  // new in Stata 14
-
    estat endogenous
 
    etpoisson
@@ -8447,6 +8452,7 @@ versio 23: howdy // should show as blace for a few years
    stteffects ipwra
 
    stteffects ra
+   teoverlap
 
    stteffects wra
 
@@ -8462,7 +8468,7 @@ versio 23: howdy // should show as blace for a few years
    teffects ipw
    teffects ipwra
    teffects nnmatch
-   teffects overlap
+   teffects overlap  // out of date in Stata 17
    teffects psmatch
    teffects ra
 
