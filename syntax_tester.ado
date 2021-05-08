@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 8, 2021 @ 16:46:32
+*! version 1.17.0.0 May 8, 2021 @ 17:03:05
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8472,6 +8472,10 @@ versio 23: howdy // should show as blace for a few years
    teffects psmatch
    teffects ra
 
+   telasso  // new in Stata 17
+   bicplot
+   lassocoef
+   // end [TE]
 
    /* [TS] time series */
    arch
@@ -8569,6 +8573,7 @@ versio 23: howdy // should show as blace for a few years
 
    irf a
    irf add
+   irf add _all  // !! highlight?
 
    irf cg
    irf cgraph
@@ -8603,7 +8608,7 @@ versio 23: howdy // should show as blace for a few years
    irf graph sirf
    irf gr sfevd
 
-   // irf ograph could be more fancy...
+   // irf ograph could be more fancy...not
    irf og
    irf ograph
 
@@ -8628,8 +8633,11 @@ versio 23: howdy // should show as blace for a few years
    // mgarch section skipped
    mgarch  // incomplete 
    mgarch ccc // new in Stata 12 from here...
+   
    mgarch dcc
+
    mgarch dvech 
+
    mgarch vcc // to here....
 
    // mswitch new in Stata 14
@@ -8666,6 +8674,7 @@ versio 23: howdy // should show as blace for a few years
 
    /* should these options be required--no not never */
    tsappend, add(4) last(foo) tsfmt(string)
+
    tsfill
 
    tsfilter // incomplete 
@@ -8673,11 +8682,15 @@ versio 23: howdy // should show as blace for a few years
    tsfilter `foo' // should fail, good? bad?
    //  allowing subcommands
    tsfilter bk // new in Stata 12 to ...
+
    tsfilter bw
+
    tsfilter cf
+
    tsfilter hp // ... here
 
    tsline
+   tsrline
    tw tsline
    twoway tsline
    graph twoway tsline
@@ -8685,7 +8698,9 @@ versio 23: howdy // should show as blace for a few years
    twoway tsrline
 
    tsreport
+
    tsrevar
+
    tsset
 
    tssmooth   // incomplete 
@@ -8754,8 +8769,11 @@ versio 23: howdy // should show as blace for a few years
    // end vec postestimation commands
    // now they show up again explicitly with an extra
    veclmar
+
    vecnorm
+
    vecrank
+
    vecstable
 
    wntestb
