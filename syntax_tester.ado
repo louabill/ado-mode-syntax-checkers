@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 7, 2021 @ 12:22:44
+*! version 1.17.0.0 May 8, 2021 @ 11:46:31
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8162,10 +8162,12 @@ versio 23: howdy // should show as blace for a few years
    /* survey commands as listed in the order of the survey estimation section */
    brr
 
+   // descriptive
    svy: mean
    svy: proportion
    svy: ratio
    svy: total
+   // linear regression
    svy: churdle 
    svy: churdle linear // new in Stata 14 
    svy: cnreg // obsolete in Stata 11
@@ -8182,28 +8184,27 @@ versio 23: howdy // should show as blace for a few years
    svy: tobit
    svy: treatreg // obsolete in Stata 14
    svy: truncreg
-
+   // sem
    svy: sem
    svy: gsem   // new in Stata 14 
-
+   // survival
    svy: stcox
    svy: stintreg // new in Stata 15 
    svy: streg
-
+   // binary response
    svy: biprobit
    svy: cloglog
+   svy: eprobit  // new in Stata 15
    svy: hetprob       // technically abbrevation doesn't exits in Stata 16
    svy: hetprobit
    svy: logistic
    svy: logit
    svy: probit
    svy: scobit
-
+   // discrete response
    svy: clogit
    svy: cmmixlogit // new in Stata 15; renamed in Stata 16
    svy: cmxtmixlogit  // new in Stata 16
-
-   svy: eprobit  // new in Stata 15
    svy: eoprobit // new in Stata 15
    svy: hetoprobit
    svy: mlogit
@@ -8211,11 +8212,12 @@ versio 23: howdy // should show as blace for a few years
    svy: ologit
    svy: oprobit
    svy: slogit
+   svy: ziologit
    svy: zioprobit // new in Stata 15
-
+   // fractional response
    svy: betareg // new in Stata 14 
    svy: fracreg // new in Stata 14
-
+   // poisson regression
    svy: cpoisson   // new in Stata 14 
    svy: etpoisson  // new in Stata 14 
    svy: gnbreg
@@ -8227,18 +8229,19 @@ versio 23: howdy // should show as blace for a few years
    svy: zip
    svy: ztnb // obsolete in Stata 11 ?
    svy: ztb  // obsolete in Stata 11 ?
-
+   // iv regression models
    svy: ivprobit
    svy: ivregress
    svy: ivtobit
-
+   // selection models
    svy: heckman
    svy: heckoprobit
    svy: heckpoisson // new in Stata 15
    svy: heckprob    // abbreviation is no longer documented in Stata 16
    svy: heckprobit
    svy: ivreg  // obsolete in Stata 10 
-
+   // longitudinal (panel)
+   svy: xtmlogit  // new in Stata 17 
    /* mlmm new in Stata 14 */
    svy: mecloglog
    svy: meglm
@@ -8251,7 +8254,6 @@ versio 23: howdy // should show as blace for a few years
    svy: meprobit
    svy: mestreg
    svy: metobit // new in Stata 15
-
    // Finite mixture models new in Stata 15
    svy: fmm: betareg 
    svy: fmm: cloglog
@@ -8272,8 +8274,6 @@ versio 23: howdy // should show as blace for a few years
    svy: fmm: tpoisson
    svy: fmm: truncreg
    svy: fmm: // sadly incomplete
-
-
    /* irt new in Stata 14 */
    svy: irt
    svy: irt 1pl
@@ -8285,6 +8285,7 @@ versio 23: howdy // should show as blace for a few years
    svy: irt rsm
    svy: irt hybrid
 
+   // the prefix commands
    svy jack: logistic
    svy jackknife: regress
    svy linear: gnbreg
