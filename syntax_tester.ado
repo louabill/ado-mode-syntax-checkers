@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 8, 2021 @ 11:46:31
+*! version 1.17.0.0 May 8, 2021 @ 15:56:54
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8313,6 +8313,100 @@ versio 23: howdy // should show as blace for a few years
    svyset
 
    /* end of the [SVY] survey stats book */
+
+   // Start of [TABLE], new in Stata 17
+   collect
+   collect : 
+   collect get:
+   collect get  // lack of colon only when using -get-
+
+   collect clear
+
+   collect combine
+
+   collect copy
+
+   collect create
+
+   collect dims
+
+   collect dir
+
+   collect drop
+   collect keep
+
+   collect label  // incomplete
+   collect label dim
+   collect label levels
+   collect label save
+   collect label use
+   collect label drop
+   collect label list
+
+   collect levels
+   collect levelsof
+
+   collect recode
+
+   collect remap
+
+   collect rename
+
+   collect save
+
+   collect set
+
+   collect stars
+
+   collect use
+
+   collect layout
+
+   collect preview
+
+   collect export
+
+   collect style // incomplete
+   collect style autolevels
+
+   collect style cell
+
+   collect style clear
+
+   collect style column
+
+   collect style _cons
+
+   collect style header
+
+   collect style html
+
+@@   collect style putdocx
+
+   collect style putpdf
+
+   collect style row // incomplete
+   collect style row split
+   collect style row stack
+
+   collect style save
+
+   collect style showbase // incomplete
+   collect style showbase off
+   collect style showbase factor
+   collect style showbase all
+
+   collect style showempty // incomplete
+   collect style showempty on
+   collect style showempty off
+
+   collect style showomit // incomplete
+   collect style showomit on
+   collect style showomit off
+
+   collect style table
+
+   collect style use
 
    /* [TE] (new in Stata 13 */
    eteffects  // new in Stata 14
