@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 8, 2021 @ 15:56:54
+*! version 1.17.0.0 May 8, 2021 @ 16:09:17
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8316,8 +8316,8 @@ versio 23: howdy // should show as blace for a few years
 
    // Start of [TABLE], new in Stata 17
    collect
-   collect : 
-   collect get:
+   collect :    // !! should be OK
+   collect get  // will be OK one way or another
    collect get  // lack of colon only when using -get-
 
    collect clear
@@ -8381,7 +8381,7 @@ versio 23: howdy // should show as blace for a few years
 
    collect style html
 
-@@   collect style putdocx
+   collect style putdocx
 
    collect style putpdf
 
