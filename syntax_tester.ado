@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 8, 2021 @ 16:09:17
+*! version 1.17.0.0 May 8, 2021 @ 16:29:20
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8315,8 +8315,9 @@ versio 23: howdy // should show as blace for a few years
    /* end of the [SVY] survey stats book */
 
    // Start of [TABLE], new in Stata 17
-   collect
-   collect :    // !! should be OK
+   collect      // incomplete
+   collect:     // should be OK
+   collect:     // OK< also
    collect get  // will be OK one way or another
    collect get  // lack of colon only when using -get-
 
@@ -8407,6 +8408,27 @@ versio 23: howdy // should show as blace for a few years
    collect style table
 
    collect style use
+
+   // uh oh, -set- commands not listed under -set- section
+   // but (as of May 8, 2021) are in the set.sthlp file
+   set collect_double // incomplete
+   set collect_double off
+   set collect_double on
+   
+   set collect_label <anything>
+   set collect_label default
+   
+   set collect_style <anything>
+   set collect_style default
+      
+   set collect_warn // incomplete
+   set collect_warn off
+   set collect_warn on
+   set collect_warn wtf // bad
+
+   set table_style <anything>
+   set table_style table
+   
 
    /* [TE] (new in Stata 13 */
    eteffects  // new in Stata 14
