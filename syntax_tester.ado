@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 8, 2021 @ 17:03:05
+*! version 1.17.0.0 May 9, 2021 @ 11:47:10
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -1561,7 +1561,7 @@ set trace off
    // (some) obsolete versions included for testing
    // best way to check is look in the index, but the index
    // insanely sorts by the [short volume name]
-   // !! put this in index section and reorder???
+   //   put this in index section and reorder???
    estat alt
    estat alternatives  // asclogit ascprobit asroprobit nlogit
    archlm // obsolete in Stata 9 
@@ -1676,6 +1676,64 @@ set trace off
    set clevel
 
    // using bayes: as a prefix; not putting it in with each possible command
+   // ... skipping to bayesvarstable
+   bayesvarstable  // new in Stata 17
+   // skip bayesfcast omnibus entry
+   bayesfcast c
+   bayesfcast compute
+
+   bayesfcast g
+   bayesfcast graph
+   
+   // cannot skip bayesirf omnibus entry, because there are commands
+   //   here which are not in the manual as such
+   // this is in contrast to other commands which point to the proper
+   //   documentation from themselves. Nice consistency.
+   // First: the ominbus part
+   bayesirf create
+   bayesirf set
+   bayesirf graph
+   bayesirf cgraph
+   bayesirf ograph
+   bayesirf table
+   bayesirf ctable
+   bayesirf describe
+   bayesirf add
+   bayesirf drop
+   bayesirf rename
+
+   // now the commands as documented @@
+   bayesirf cr
+   bayesirf create
+
+   bayesirf graph // incomplete
+   bayesirf g
+   bayesirf gr irf
+   bayesirf gra oirf
+   bayesirf grap dm
+   bayesirf graph cirf
+   bayesirf gr coirf
+   bayesirf gr cdm
+   bayesirf gr fevd
+   
+   bayesirf cgraph
+   bayesirf cg
+
+   bayesirf ograph
+   bayesirf og
+   
+   bayesirf table // incomplete
+   bayesirf t
+   bayesirf ta irf
+   bayesirf tab oirf
+   bayesirf tabl dm
+   bayesirf table cirf
+   bayesirf tab coirf
+   bayesirf tab cdm
+   bayesirf tab fevd
+
+   bayesirf ctable
+   bayesirf ct
    /* end [BAYES] manual */
 
    /* [CM] Choice models */
@@ -3198,13 +3256,12 @@ set trace off
    irf graph
    irf ograph
    irf cgraph
-   // !! Check after working through bayes var stuff
    // bayes... VAR new in Stata 17
    bayesfcast graph
    bayesvarstable
    bayesirf graph
    bayesirf ograph
-   abyesirf cgraph
+   bayesirf cgraph
 
    xtline
 
@@ -3214,7 +3271,7 @@ set trace off
    stci
    stphtest  // obsolete in Stata 9
    stphplot
-   stintphplot // !! new in Stata 17
+   stintphplot // new in Stata 17
    stcoxkm
    estat phtest
    stcurve
@@ -3223,7 +3280,7 @@ set trace off
    // new in Stata 16
    meta forestplot
    meta funnelplot
-   meta galbraith // !! new in Stata 17 
+   meta galbraith // new in Stata 17 
    meta labbeplot
    estat bubbleplot
 
@@ -3235,7 +3292,7 @@ set trace off
    lsens
 
 
-   bicplot  // !! new in Stata 17 
+   bicplot  // new in Stata 17 
    coefpath // new in Stata 16
    cvplot   // new in Stata 16
 
@@ -3268,7 +3325,7 @@ set trace off
    marginsplot
    bayesgraph
    power, graph // incomplete
-   ciwidth, graph // !! incomplete, new in Stata 16 
+   ciwidth, graph // incomplete, new in Stata 16 
    tabodds
    teffects overlap // obsolete in Stata 17 (changed to teoverlap)
    teoverlap // new in Stata 17
@@ -3603,10 +3660,8 @@ set trace off
    local /* used elsewhere */
    long /* used elsewhere */
 
-   // !! BUG: without trailing space, indentation is wrong
-   // !! BUG: with comment, indentation is wrong!
-   mata 
-   end  // needed for indentation here
+   mata
+   end // needed for indentation here
    matrix /* used elsewhere */
 
    namespace
@@ -8814,6 +8869,8 @@ versio 23: howdy // should show as blace for a few years
    xtdes
    xtdescribe
 
+   xtdidregress // new in Stata 17
+
    xtdpd
 
    xtdpdsys
@@ -8853,6 +8910,8 @@ versio 23: howdy // should show as blace for a few years
    xtmepoisson
    xtmixed
    // end obsolete block
+
+   xtmlogit  // new in Stata 17
 
    xtnbreg
 
@@ -8933,6 +8992,7 @@ versio 23: howdy // should show as blace for a few years
 
    // -save- is a misnomer; should be -store-
    storedresults save
+   storedresults sav
    storedresults comp
    storedresults compare
    storedresults drop
