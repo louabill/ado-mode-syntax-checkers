@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 9, 2021 @ 11:47:10
+*! version 1.17.0.0 May 9, 2021 @ 12:28:36
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -7401,7 +7401,7 @@ pause "fuggy"
    {manlink hahahah} // should fail
    {manlinki R summarize}
 
-   {news:is bad} // obsolete in Stata 16 !! should mark as obsolete
+   {news:is bad} // obsolete in Stata 16
    {net fishing}
    {net fishing:wide}
    {net_d fail} // should fail
@@ -8031,7 +8031,7 @@ versio 23: howdy // should show as blace for a few years
    spmatrix copy from to // !! matrix matrix?
    spmatrix copy oops // incomplete
 
-   // !! need subcommand matrix
+   // need subcommand matrix
    spmatrix create cont  // incomplete
    spmatrix create cont foo
    spmatrix create contiguity bar
