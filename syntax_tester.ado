@@ -1,4 +1,4 @@
-*! version 1.17.0.0 May 9, 2021 @ 12:28:36
+*! version 1.17.0.1 April 15, 2022 @ 12:43:16
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -3770,7 +3770,7 @@ version /* used elsewhere */
 
    mata query
    mata set // incomplete
-   mata set matacache
+   mata set matacache  // new in Stata 17, compile 170104
    mata set matalnum on
    mata set matalnum off
    mata set mataoptimize on
@@ -3782,6 +3782,7 @@ version /* used elsewhere */
    mata set matalibs
    mata set matamofirst on
    mata set matamofirst off
+   mata set matasolvetol
 
    mata stata
    mata which
@@ -6470,9 +6471,10 @@ version /* used elsewhere */
    c(matalnum)
    c(mataoptimize)
    c(matafavor)
-   c(matacache)
+   c(matacache)  // new in Stata 17, compile 170104
    c(matalibs)
    c(matamofirst)
+   c(matasolvetol)
 
    /* java settings, new in Stata 16 */
    c(java_heapmax)
@@ -8379,6 +8381,10 @@ versio 23: howdy // should show as blace for a few years
    collect clear
 
    collect combine
+
+   collect composite // incomplete 
+   collect composite define // added 06apr2022 update
+   collect composite drop   // added 06apr2022 update
 
    collect copy
 
