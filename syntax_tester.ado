@@ -1,4 +1,4 @@
-*! version 1.17.0.1 April 15, 2022 @ 12:43:16
+*! version 1.17.0.1 September 29, 2023 @ 16:45:40
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -91,8 +91,8 @@ version 16.2 // bad
 version 17
 version 17.0
 version 17.1 // bad
-version 18   // bad
-version 20   // bad for awhile
+version 18
+version 19   // bad for awhile
 version 44   // bad for multiple generations
 
    /* this program does nothing - it merely has some things for testing syntax coloring */
@@ -117,12 +117,18 @@ version 44   // bad for multiple generations
    adoupdate // obsolete in Stata 16
    ado update
    ameans
+   
+   // abbreviations no longer documented in Stata 18
    an
    ano
    anov
    anova
+   anov
+   anova
    // anova postestimation skipped because it matches regress
+
    areg
+
    asclogit              // obsolete in Stata 16                           
    asmixlogit            // new in Stata 15 // obsolete in Stata 16
    asmprobit             // obsolete in Stata 16 
@@ -131,8 +137,10 @@ version 44   // bad for multiple generations
    betareg               // new in Stata 14
    binreg
    biprobit
+
    bitest
    bitesti
+
    bootstrap
    boxcox
    brier
@@ -162,6 +170,7 @@ version 44   // bad for multiple generations
    clog         // abbrev obsolete in Stata 16 
    clogi        // abbrev obsolete in Stata 16
    clogit
+
    cloglog
    cls
    cnr cnre cnreg        // obsolete as of Stata 11
@@ -193,7 +202,8 @@ version 44   // bad for multiple generations
    //  Starting in Stata 17, capitalization changed
    //   this is ignored, since any subcommand will work
    //   obsolete versions left as OK, also
-   copyright             // subcommands new in Stata 14
+   copyright
+   // all the subcommands are not really subcommands, so all made obsolete in Stata 18
    copyright apache
    copyright autolink    // new in Stata 15
    copyright boost
@@ -220,7 +230,7 @@ version 44   // bad for multiple generations
    copyright slf4j       // new in Stata 15
    copyright ttf2pt1
    copyright zlib
-   copyright foobar // error (which could be marked as well but why?)
+   copyright foobar // no error, everything ignored after copyright
 
    cor
    corr
@@ -231,12 +241,14 @@ version 44   // bad for multiple generations
    correlate
    pwcorr
 
-   cpoisson              // new in Stata 14 
+   cpoisson              // new in Stata 14
    cumul
    cusum
 
    db
    set maxdb
+   demandsys                            // new in Stata 18
+
    /* diagnostic plots */
    symplot
    quantile
@@ -263,8 +275,11 @@ version 44   // bad for multiple generations
    doedit
 
    dotplot
+   
    dstdize
    istdize
+
+   dtable                               // new in Stata 18
 
    dydx
    integ
@@ -339,6 +354,7 @@ version 44   // bad for multiple generations
    esti note l
    estimates notes list
    estimat notes drop
+   est note bleen  // bad, but not distinguised as such
 
    estimates descr  // again
    estimates r
@@ -347,6 +363,7 @@ version 44   // bad for multiple generations
    estimates t  // obsolete abbrev starting Stata 10
    estimates tab
    estimates table
+   etable               // new in Stata 17 
    estimates sel        // new in Stata 16
    estimates selected   // new in Stata 16 
    estimates f // obsolete abbrev starting Stata 11
@@ -359,6 +376,7 @@ version 44   // bad for multiple generations
    estim ch // bad
    estima change // bad
    /* end estimates */
+
    e // dumb abbreviation
    ex
    exi
@@ -366,6 +384,8 @@ version 44   // bad for multiple generations
 
    exlogistic
    expoisson
+
+   // Start Here!
 
    fracpoly // obsolete in Stata 13
    fracgen  // obsolete in Stata 13
@@ -494,6 +514,8 @@ version 44   // bad for multiple generations
    set logtype text
    set logtype s
    set logtype smcl
+   set logmsg on   // added in 04oct2022 update
+   set logmsg off  // added in 04oct2022 update
    set li
    set linesize
 
@@ -6369,6 +6391,7 @@ version /* used elsewhere */
    c(dp)
    c(linesize)
    c(pagesize)
+   c(logmsg)
    c(logtype)
    c(noisily)
    c(charset) // new in Stata 13 mac only, obsolete in Stata 14 
@@ -6733,6 +6756,29 @@ version /* used elsewhere */
 * should work, love them emojis!
    foreach var of varlist happy😀 {
       }
+   foreach var of varlist foo bar { // should highlight all
+      }
+   foreach var of varlist foo* *bar { // should highlight all
+      }
+   foreach var of varlist foo4-star { // should highlight
+      }
+   foreach var of varlist foo4-4star { // should not highlight
+      }
+   foreach var of varlist foo*-bar* { // really should not highlight, but we'll take it for now
+      }
+   foreach var of varlist this-that { // should highlight
+      }
+   foreach var of varlist this - that { // should highlight
+      }
+   foreach var of varlist fooey* { // should highlight
+      }
+   foreach var of varlist foo*bar { // should highlight
+
+      }
+   foreach var of varlist { // should not highlight
+         }
+      
+   program define fooff
 
    forv // incomplete
    forvalues bleen // incomplete
