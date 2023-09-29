@@ -1,4 +1,4 @@
-*! version 1.17.0.1 September 29, 2023 @ 16:45:40
+*! version 1.17.0.1 September 29, 2023 @ 19:38:32
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -385,8 +385,6 @@ version 44   // bad for multiple generations
    exlogistic
    expoisson
 
-   // Start Here!
-
    fracpoly // obsolete in Stata 13
    fracgen  // obsolete in Stata 13
    fp
@@ -453,12 +451,19 @@ version 44   // bad for multiple generations
 
    intreg
 
+   ivfprobit                            // new in Stata 18
+
    ivpoisson // incomplete
    ivpoisson gmm
    ivpoisson cfunc
    ivpoisson cfunction
 
    ivprobit
+
+   ivqregress                           // incomplete
+   ivqregress iqr                       // new in Stata 18 
+   ivqregress smooth                    // new in Stata 18
+
    ivreg                 // obsolete in Stata 10
    ivregress
    ivtobit
@@ -521,7 +526,7 @@ version 44   // bad for multiple generations
 
    logistic
 
-   logi    // abbrev obsolete in Stata 16
+   logi    // abbrev undocumented in Stata 16
    logit
 
    loneway
@@ -531,6 +536,8 @@ version 44   // bad for multiple generations
    lrtest
    lsens
    lv
+
+   // Start here!!
 
    margins
    marginsplot
