@@ -1,4 +1,4 @@
-*! version 1.17.0.1 September 29, 2023 @ 19:38:32
+*! version 1.17.0.1 September 30, 2023 @ 16:40:47
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -537,15 +537,20 @@ version 44   // bad for multiple generations
    lsens
    lv
 
-   // Start here!!
-
+   makespline              // incomplete
+   makespline bspline      // new in Stata 18
+   makespline piecewise    // new in Stata 18
+   makespline rcs          // new in Stata 18 
+   makespline linear       // new in Stata 18
+   
    margins
    marginsplot
 
    set mat       // obsolete in Stata 16 
    set matsize   // obsolete in Stata 16 
 
-   // inside 'maximize' help (not as of Stata 17, at least)
+   // maximize can't get highlighted because it uses a user-written command
+   // inside 'maximize' help
    set maxiter
 
    mean
@@ -576,10 +581,38 @@ version 44   // bad for multiple generations
    misstable nest
    misstable nested
 
-   mkspline
+   mkspline   // obsolete in Stata 18
 
+   // eek -ml model- needs method highlighting
    ml mod
    ml model
+   ml mod lf
+   ml model linearform
+   ml mode d0
+   ml model d1
+   ml model d1debug
+   ml model d2
+   ml model d2debug
+   ml mode lf0
+   ml model lf1
+   ml model lf1debug
+   ml model lf2
+   ml model lf2debug
+   ml mod l1 // bad
+   ml model gf0
+   
+   ml model derivativeform0
+   ml model derivativeform1
+   ml model derivativeform1debug
+   ml model derivativeform2
+   ml model derivativeform2debug
+   ml mode linearform0
+   ml model linearform1
+   ml model linearform1debug
+   ml model linearform2
+   ml model linearform2debug
+   ml model generalform0
+   
    ml clear
    ml cle // bad
    ml q
@@ -609,6 +642,7 @@ version 44   // bad for multiple generations
    ml foot
    ml footnote
    ml score
+   
    // start obsolete block (Stata 8 or earlier)
    ml b
    ml begin
@@ -641,6 +675,8 @@ version 44   // bad for multiple generations
    set pagesize
 
    mprobit
+
+   // Start here!!
 
    nbreg
    gnbreg
