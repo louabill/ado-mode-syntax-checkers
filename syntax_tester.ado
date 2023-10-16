@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 16, 2023 @ 17:09:37
+*! version 1.17.0.1 October 16, 2023 @ 18:47:37
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -1514,8 +1514,6 @@ set trace off
    symmetry
    symmi
 
-   // !! Start here!
-   
    table
 
    tabstat
@@ -1544,7 +1542,7 @@ set trace off
 
    tnbreg // new in Stata 11.1
 
-   tob
+   tob    // abbreviations undocumented in Stata 16
    tobi
    tobit
 
@@ -1614,6 +1612,13 @@ set trace off
 
    which
 
+   wildboot
+   wildboots
+   wildbootst
+   wildbootstr
+   wildbootstra
+   wildbootstrap
+   
    xi
 
    zinb
@@ -1632,7 +1637,8 @@ set trace off
    /* endless postestimation */
    // not checked too much since Stata 14
    // common across most estimation commands
-   // should have their own docs anyways
+   // it would really help to have a common location for these, instead
+   //   of needing to check all estimtion commands
 
    // anova (regress) postestimation
    adjust // obsolete in Stata 11
@@ -1738,6 +1744,21 @@ set trace off
 
    /* end subcommand using postestimation */
    /* end [R] */
+
+   /* [ADAPT] which is new in Stata 18 */
+   gsbounds
+
+   gsdesign  // incomplete, but could have a user method, so OK
+   gsdesign onemean
+   gsdesign twomeans
+   gsdesign oneprop
+   gsdesign oneproportion
+   gsdesign twoprop
+   gsdesign twoproportions
+   gsdesign log
+   gsdesign logrank
+
+   /* end [ADAPT] */
 
    /* bayes prefix, introduced in Stata 15 */
    /* no good mechanism for prefix commands....*/
