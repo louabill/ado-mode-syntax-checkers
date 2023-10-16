@@ -1,4 +1,4 @@
-*! version 1.17.0.1 September 30, 2023 @ 16:40:47
+*! version 1.17.0.1 October 16, 2023 @ 17:09:37
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -676,8 +676,6 @@ version 44   // bad for multiple generations
 
    mprobit
 
-   // Start here!!
-
    nbreg
    gnbreg
 
@@ -695,6 +693,7 @@ version 44   // bad for multiple generations
    net set other
    net q
    net query
+   net in  // bad
    net ins
    net install
    net get
@@ -702,7 +701,7 @@ version 44   // bad for multiple generations
    net stb
    ado
    ado dir
-   ado di  // bad, but highlights because -ado- is OK
+   ado di  // bad, but -ado- highlights because -ado- is OK
    ado d
    ado describe
    ado update    // new in Stata 16 
@@ -711,6 +710,7 @@ version 44   // bad for multiple generations
    net search
 
    /* netio, which is also in set */
+   set httpproxy  // incomplete
    se httpproxy on
    set httpproxy off
    set httpproxy foo // bad
@@ -738,8 +738,8 @@ version 44   // bad for multiple generations
 
    nptrend
 
-   olog   // abbrev obsolete in Stata 16 
-   ologi  // abbrev obsolete in Stata 16 
+   olog   // abbrev undocumented in Stata 16 
+   ologi  // abbrev undocumented in Stata 16 
    ologit 
 
    on
@@ -748,9 +748,9 @@ version 44   // bad for multiple generations
    onewa
    oneway
 
-   oprob
-   oprobi  // abbrev obsolete in Stata 16 
-   oprobit // abbrev obsolete in Stata 16 
+   oprob   // abbrev undocumented in Stata 16 
+   oprobi  // abbrev undocumented in Stata 16 
+   oprobit
 
    orthog
    orthpoly   
@@ -771,6 +771,7 @@ version 44   // bad for multiple generations
    estat gof
 
    postest  // new in Stata 14; strange to have in a do-file
+
    predict
    predictnl
 
@@ -852,6 +853,8 @@ version 44   // bad for multiple generations
 
    // regress postestimation left out on purpose here
 
+   reri      // new in Stata 18
+
    #r
    #re
    #rev
@@ -870,6 +873,7 @@ version 44   // bad for multiple generations
    rocplot
 
    rocreg
+
    estat nproc
 
    rocregplot
@@ -900,7 +904,7 @@ version 44   // bad for multiple generations
 
    serrbar
    /* set commands */
-   set a
+   set a              // abbreviation undocumented in Stata 18[?]
    set adosize
    set autotabgraphs // incomplete
    set autotabgraphs on // win only
@@ -918,6 +922,17 @@ version 44   // bad for multiple generations
    set coeftabresults // incomplete
    set coeftabresults on
    set coeftabresults off
+
+   set collect_double 
+   set collect_double on  
+   set collect_double off
+   set collect_label default
+   set collect_label <anything>
+   set collect_style default
+   set collect_style <anything>
+   set collect_warn
+   set collect_warn on
+   set collect_warn off
 
    set conren // unix console only
    set conren clear
@@ -965,6 +980,11 @@ version 44   // bad for multiple generations
    set docx_paramode
    set docx_paramode on
    set docx_paramode off
+
+   set doeditbackup
+   set doeditbackup on   // new in Stata 18 
+   set doeditbackup off  // new in Stata 18 
+
    set dots
    set dots on
    set dots off
@@ -980,6 +1000,8 @@ version 44   // bad for multiple generations
    set dp per
    set dp period
 
+   set dtascomplevel  // new in Stata 18
+
    set emptycells
    set emptycells keep
    set emptycells drop
@@ -990,7 +1012,10 @@ version 44   // bad for multiple generations
    set eolcha 
    set eolch mac
    set eolchar unix
-   // end obsolete block 
+   // end obsolete block
+
+   set etable_style <anything> // new in Stata 18
+   set etable_style etable
 
    set fastscroll // incomplete
    set fastscroll on
@@ -1061,8 +1086,12 @@ version 44   // bad for multiple generations
    set iterlog off
 
    // new in Stata 16 
-   set java_heapmax
+   set java_heapmax  // incomplete, but needs something with a number
+   set java_heapmax default
    set java_home
+   set java_home default
+
+   set kmp_blocktime // new in Stata 18
 
    // set lapack* new in Stata 17
    set lapack_mkl on
@@ -1091,6 +1120,10 @@ version 44   // bad for multiple generations
    set locksplit        // incomplete
    set locksplit on
    set locksplitters off
+
+   set logmsg
+   set logmsg on   // added in 04oct2022 update
+   set logmsg off  // added in 04oct2022 update
 
    set logt             // incomplete
    set logt t
@@ -1201,6 +1234,12 @@ version 44   // bad for multiple generations
    set python_exec
    set python_userpath
 
+   // new in Stata 18
+   set reshape_favor // incomplete
+   set reshape_favor default
+   set reshape_favor speed
+   set reshape_favor memory
+
    set reventr
    set reventries
 
@@ -1271,6 +1310,15 @@ version 44   // bad for multiple generations
    // new in Stata 17
    set sortrngstate
 
+   // documented in -set- in Stata 18
+   set table_style <number>
+   set table_style default
+
+   // new in Stata 18, Windows only
+   set taskbargroups
+   set taskbargroups on
+   set taskbargroups off
+   
    // undocumented in Stata 17, but still functional[?] 
    set timeout1
    set timeout2
@@ -1466,6 +1514,8 @@ set trace off
    symmetry
    symmi
 
+   // !! Start here!
+   
    table
 
    tabstat
@@ -8561,6 +8611,7 @@ versio 23: howdy // should show as blace for a few years
 
    // uh oh, -set- commands not listed under -set- section
    // but (as of May 8, 2021) are in the set.sthlp file
+   //  put into the -set- section in Stata 18   
    set collect_double // incomplete
    set collect_double off
    set collect_double on
