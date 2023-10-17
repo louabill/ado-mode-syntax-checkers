@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 16, 2023 @ 18:47:37
+*! version 1.17.0.1 October 17, 2023 @ 13:06:28
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -1773,7 +1773,6 @@ set trace off
    bayesgraph
    bayesgraph matrix
    /* no special highlighting yet */
-   // oops.... this never should have been highlighted
    bayesgraph name _all
 
    bayesstats // incomplete
@@ -1787,6 +1786,7 @@ set trace off
    bayesstats grubin _all
 
    bayesstats ic
+   bayesstats ic _all
 
    bayesstats ppvalues   // new in Stata 16 
    bayesstats ppval
@@ -1871,6 +1871,42 @@ set trace off
    bayesirf ctable
    bayesirf ct
    /* end [BAYES] manual */
+
+   /* [BMA} manual, new in Stata 18 */
+   bmaregress
+   bmacoefsample
+
+   // skipping omnibus postestimation section in favor of the single commands
+   // also skipping omnibus bmagraph section
+
+   bmagraph // incomplete
+   bmagraph coefdens
+   bmagraph coefdensity
+   bmagraph coefdensity _all
+
+   bmagraph msize
+
+   bmagraph pmp
+
+   bmagraph varmap
+
+   bmapredict
+
+   // skipping omnibus bmastats section
+
+   bmastats // incomplete
+   bmastats joint
+   bmastats jointness
+
+   bmastats lpm
+
+   bmastats mod
+   bmastats models
+
+   bmastats msize
+
+   bmastats pip
+
 
    /* [CM] Choice models */
    // manual new in Stata 16
