@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 17, 2023 @ 13:06:28
+*! version 1.17.0.1 October 18, 2023 @ 15:09:27
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -1907,7 +1907,87 @@ set trace off
 
    bmastats pip
 
+   /* [CAUSAL] Causal (nice abbreviation) */
+   // manual is new in Stata 18, and seems to replace the [TE] manual
+   // skipping the omnibus 'Causal inference commands'
+   // skipping omnibus 'DID intro'
 
+   /* [TE] (new in Stata 13 */
+   didregress    // new in Stata 17
+   xtdidregress
+   
+   // didregress post estimation, which is not in an -estat- section for [TE]
+   estat trendplots
+   estat ptrends
+   estat granger
+   
+   eteffects  // new in Stata 14
+   estat endogenous
+
+   etpoisson
+
+   etregress
+
+   /* stteffects in order of sections, not intro, leave out postest */
+   /* stteffects new in Stata 14 */
+   stteffects // incomplete 
+   stteffects ipw
+   stteffects ipwra
+   stteffects ra
+   stteffects wra
+
+   teoverlap
+
+
+   // new in Stata 18
+   hdidregress // incomplete
+   hdidregress twfe
+   hdidregress ra
+   hdidregress ipw
+   hdidregress aipw
+
+   // new in Stata 18
+   mediate
+
+   /* tebalance new in Stata 14 */
+   // skipping the omnibus -tebalance- section
+   tebalance // incomplete
+   tebalance box
+   tebalance density
+   tebalance overid
+   tebalance summarize
+
+   // here the omnibus and the sections are both in alphabetical order
+   teffects // incomplete
+   teffects aipw
+   teffects ipw
+   teffects ipwra
+   teffects nnmatch
+   teffects overlap  // out of date in Stata 17
+   teffects psmatch
+   teffects ra
+
+   telasso  // new in Stata 17
+   
+   bicplot
+   lassocoef
+   lassoinfo
+   lassoknots
+   lassoselect
+
+   teoverlap
+
+   // xthdidregress has just an omnibus section
+   // new in Stata 18
+   xthdidregress // incomplete
+   xthdidregress twfe
+   xthdidregress ra
+   xthdidregress ipw
+   xthdidregress aipw
+
+   // end [CASUAL] (was [TE]
+
+ 
    /* [CM] Choice models */
    // manual new in Stata 16
    // contains some commands which were in other manuals
@@ -8688,52 +8768,6 @@ versio 23: howdy // should show as blace for a few years
    set table_style table
    // end [TABLE]
 
-   /* [TE] (new in Stata 13 */
-   didregress // new in Stata 17
-   // didregress post estimation, which is not in an -estat- section for [TE]
-   estat trendplots
-   estat ptrends
-   estat granger
-   
-   eteffects  // new in Stata 14
-   estat endogenous
-
-   etpoisson
-
-   etregress
-
-   /* stteffects in order of sections, not intro, leave out postest */
-   /* stteffects new in Stata 14 */
-   stteffects // incomplete 
-   stteffects ipw
-
-   stteffects ipwra
-
-   stteffects ra
-   teoverlap
-
-   stteffects wra
-
-   /* tebalance new in Stata 14 */
-   tebalance // incomplete
-   tebalance box
-   tebalance density
-   tebalance overid
-   tebalance summarize
-   // here the omnibus and the sections are both in alphabetical order
-   teffects // incomplete
-   teffects aipw
-   teffects ipw
-   teffects ipwra
-   teffects nnmatch
-   teffects overlap  // out of date in Stata 17
-   teffects psmatch
-   teffects ra
-
-   telasso  // new in Stata 17
-   bicplot
-   lassocoef
-   // end [TE]
 
    /* [TS] time series */
    arch
