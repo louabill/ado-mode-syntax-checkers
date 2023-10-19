@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 18, 2023 @ 15:09:27
+*! version 1.17.0.1 October 19, 2023 @ 18:05:31
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -1985,7 +1985,7 @@ set trace off
    xthdidregress ipw
    xthdidregress aipw
 
-   // end [CASUAL] (was [TE]
+   // end [CASUAL] (was [TE])
 
  
    /* [CM] Choice models */
@@ -2075,10 +2075,10 @@ set trace off
    clear matrix
    clear programs
    clear ado
-   clear all
    clear rngstream  // new in Stata 15
    clear frames     // new in Stata 16
    clear collect    // new in Stata 17
+   clear all
    clear * // bad but works; cannot fix easily, because of special meaning of * in regexps
 
    clonevar
@@ -2204,7 +2204,7 @@ set trace off
    egen = median()
    egen = min()
    egen = mode()
-   egen = mtr()
+   egen = mtr()   // undocumented in Stata 17 (but still exists)
    /* neqany mapped to anycount */
    egen = neqany()
    egen = pc()
@@ -2290,8 +2290,13 @@ set trace off
    se dp com
    set dp comma
    set dp per
-   set dp period
+      set dp period
 
+   // new in Stata 18
+   fralias  // incomplete
+   fralias add
+   fralias describe
+   
    // frames are new in Stata 16
    // in order of docs, ignoring -frames- section
    frame change
@@ -2315,10 +2320,16 @@ set trace off
 
    frame rename
 
+   frames describe  // new in Stata 18
+
    frames dir   // ugh, now there is a plural
 
    frames reset // no sure why this is not -frames clear-, maybe because
                 // of clear frames?
+   clear frames
+
+   frames save // new in Stata 18
+   frames use  // new in Stata 18
 
    frget   // why not frame get??
 
@@ -2329,6 +2340,8 @@ set trace off
    frlink d
    frlink describe
    frlink rebuild
+
+   frunalias
 
    g
    ge
@@ -2456,6 +2469,8 @@ set trace off
    inpu
    input
 
+   // !! start here
+   
    insobs // new in Stata 14
 
    insheet // obsolete in Stata 13
