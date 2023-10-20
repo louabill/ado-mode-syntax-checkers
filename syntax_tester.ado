@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 19, 2023 @ 18:05:31
+*! version 1.17.0.1 October 20, 2023 @ 18:50:51
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -2469,8 +2469,6 @@ set trace off
    inpu
    input
 
-   // !! start here
-   
    insobs // new in Stata 14
 
    insheet // obsolete in Stata 13
@@ -2522,9 +2520,12 @@ set trace off
    la l
    label l
    label list
+   la copy
    label copy
    lab drop
    labe save
+   la lang
+   label language
    /* end label */
 
    la lang
@@ -2653,10 +2654,20 @@ set trace off
    reshape long
    reshape wide
    reshape error
+   // new in Stata 18 (also in -set-)
+   set reshape_favor default
+   set reshape_favor memory
+   set reshape_favor speed
+   // farther down in -reshape-
    reshape i
    reshape j
    reshape xij
    reshape xi
+   // new in Stata 18 
+   reshape favor  // incomplete
+   reshape favor memory
+   reshape favor speed
+   // back to usual
    reshape
    reshape q
    reshape query
@@ -2788,6 +2799,8 @@ set trace off
    zipfile
    unzipfile
    /* end [D] data management */
+
+   // !! Start Herd
 
    /* begin [DSGE] DSGE manual */
    // New in Stata 15, but just added to ado-mode in Stata 16
