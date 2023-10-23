@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 23, 2023 @ 18:01:41
+*! version 1.17.0.1 October 23, 2023 @ 18:37:54
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -3914,8 +3914,10 @@ set trace off
    dsregress
 
    elasticnet
+   elasticnet cox // new in Stata 18 
 
    lasso
+   lasso cox // new in Stata 18
 
    lassocoef
 
