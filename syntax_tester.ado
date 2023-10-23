@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 20, 2023 @ 18:50:51
+*! version 1.17.0.1 October 23, 2023 @ 16:37:54
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -2800,8 +2800,6 @@ set trace off
    unzipfile
    /* end [D] data management */
 
-   // !! Start Herd
-
    /* begin [DSGE] DSGE manual */
    // New in Stata 15, but just added to ado-mode in Stata 16
 
@@ -2814,6 +2812,8 @@ set trace off
    irf
 
    dsgenl
+
+   estat steady
 
    estat transition
 
@@ -2857,6 +2857,7 @@ set trace off
    fmm 9: nbreg
    fmm 3: ologit
    fmm 3: oprobit
+   fmm 33: pointmass
    fmm 3: poisson
    fmm 3: probit
    fmm 3: regress
@@ -2908,7 +2909,12 @@ set trace off
    datepart()      // new in Stata 17
    day()
    daysinmonth()   // new in Stata 17
+   dayssincedow()  // new in Stata 18
+   dayssinceweekday()  // new in Stata 18
+   daysuntildow() // new in Stata 18
+   daysuntilweekday() // new in Stata 18 
    dhms()
+   dmy()          // new in Stata 18
    dofb()
    dofC()
    dofc()
@@ -2920,6 +2926,8 @@ set trace off
    dow()
    doy()
    firstdayofmonth() // new in Stata 17
+   firstdowofmonth() // new in Stata 18
+   firstweekdayofmonth() // new in Stata 18
    halfyear()
    halfyearly()
    hh()
@@ -2929,7 +2937,9 @@ set trace off
    hours()
    isleapsecond()   // new in Stata 17 
    isleapyear()     // new in Stata 17 
-   lastdayofmonth() // new in Stata 17 
+   lastdayofmonth() // new in Stata 17
+   lastdowofmonth() // new in Stata 18
+   lastweekdayofmonth() // new in Stata 18
    mdy()
    mdyhms()
    minutes()
@@ -2942,10 +2952,14 @@ set trace off
    msofminutes()
    msofseconds()
    nextbirthday()     // new in Stata 17
+   nextdow()          // new in Stata 18
    nextleapyear()     // new in Stata 17
+   nextweekday()      // new in Stata 18
    now()              // new in Stata 17
    previousbirthday() // new in Stata 17
+   previousdow()      // new in Stata 18
    previousleapyear() // new in Stata 17
+   previousweekday()  // new in Stata 18
    qofd()
    quarter()
    quarterly()
@@ -3027,7 +3041,9 @@ set trace off
    I()
    inv()
    invsym()
-   issym() // obsolete in Stata 10 
+   issym() // obsolete in Stata 10
+   invvech() // new in 22apr2022 update
+   invvecp() // new in 22apr2022 update
    J()
    matuniform()
    nullmat()
@@ -3035,6 +3051,9 @@ set trace off
    syminv() // obsolete in Stata 10 
    vec()
    vecdiag()
+   vech() // new in 22apr2022 update
+   vecp() // new in 22apr2022 update
+
    // those returning scalars
    coleqnumb() // new in Stata 15 
    colnfreeparms() // new in Stata 15 
@@ -3285,6 +3304,8 @@ set trace off
    weibullphden()
    weibullph()
    weibullphtail()
+   invweibull()
+   invweibulltail()
    invweibullph()      // new in Stata 14 
    invweibullphtail()  // new in Stata 14
 
@@ -3309,8 +3330,12 @@ set trace off
    plural()
    proper() // obsolete in Stata 14 
    real()
+   regexcapture()      // new in Stata 18 
+   regexcapturenamed() // new in Stata 18 
    regexm()
    regexr()
+   regexreplace()     // new in Stata 18
+   regexreplaceall()  // new in Stata 18
    regexs()
    ustrregexm()
    ustrregexrf()
