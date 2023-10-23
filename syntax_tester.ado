@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 23, 2023 @ 16:37:54
+*! version 1.17.0.1 October 23, 2023 @ 18:01:41
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -1770,7 +1770,15 @@ set trace off
    // Bayesian postestimation not separated out here, because all commands
    //   have their own documentation
 
-   bayesgraph
+   bayesgraph // incomplete
+   bayesgraph diagnostics
+   bayesgraph trace
+   bayesgraph ac
+   bayesgraph histogram
+   bayesgraph kdensity
+   bayesgraph cusum
+   bayesgraph matrix
+
    bayesgraph matrix
    /* no special highlighting yet */
    bayesgraph name _all
@@ -3585,7 +3593,7 @@ set trace off
    // new in Stata 16
    meta forestplot
    meta funnelplot
-   meta galbraith // new in Stata 17 
+   meta galbraithplot // new in Stata 17 
    meta labbeplot
    estat bubbleplot
 
@@ -3596,10 +3604,34 @@ set trace off
    lroc
    lsens
 
+   teoverlap          // new in Stata 17
+   tebalance box
+   estat effectsplot  // new in Stata 18 
+   estat trendplots
+   estat grangerplot  // new in Stata 18
+   estat bdecomp      // new in Stata 18 
+   estat atetplot     // new in Stata 18 
+   estat aggregation  // new in Stata 18
 
    bicplot  // new in Stata 17 
    coefpath // new in Stata 16
    cvplot   // new in Stata 16
+   stcurve
+
+   bayesgraph diagnostics
+   bayesgraph trace
+   bayesgraph ac
+   bayesgraph histogram
+   bayesgraph kdensity
+   bayesgraph cusum
+   bayesgraph matrix
+
+   // new in Stata 18
+   bmagraph
+   bmagraph pmp
+   bmagraph msize
+   bmagraph varmap
+   bmagraph coefdensity
 
    irtgraph icc
    irtgraph tcc
@@ -3619,6 +3651,11 @@ set trace off
    mdsconfig
    mdsshepard
 
+   power, graph  // incomplete
+   ciwidth, graph // incomplete, new in Stata 16
+   gsbounds
+   gsdesign
+
    cusum
    cchart
    pchart
@@ -3628,13 +3665,10 @@ set trace off
    serrbar
 
    marginsplot
-   bayesgraph
-   power, graph // incomplete
-   ciwidth, graph // incomplete, new in Stata 16 
    tabodds
    teffects overlap // obsolete in Stata 17 (changed to teoverlap)
-   teoverlap // new in Stata 17
-   tebalance box
+   estat coefplot // new in Stata 18
+   estat waldplot // new in Stata 18
    npgraph
    fp plot
    fracplot
@@ -3725,7 +3759,8 @@ set trace off
    line foo bar // twoway optional for line
 
    graph twoway lowess
-
+   twoway lowess
+   
    tw lpoly
 
    two lpolyci
