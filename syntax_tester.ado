@@ -1,4 +1,4 @@
-*! version 1.17.0.1 December 14, 2023 @ 18:07:48
+*! version 1.17.0.1 December 14, 2023 @ 18:25:49
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -6029,8 +6029,17 @@ version /* used elsewhere */
    meta trim
    meta trimfill
 
+   meta mereg       // new in Stata 18 
+   meta meregress   // new in Stata 18
+
+   meta multi       // new in Stata 18 
+   meta multilevel  // new in Stata 18 
+
    meta mvreg       // new in Stata 17
    meta mvregress   // new in Stata 17
+
+   estat gr
+   estat group
 
    estat het            // new in Stata 17 
    estat heterogeneity  // new in Stata 17
