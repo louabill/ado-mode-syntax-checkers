@@ -1,4 +1,4 @@
-*! version 1.17.0.1 October 23, 2023 @ 18:37:54
+*! version 1.17.0.1 December 14, 2023 @ 18:07:48
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -977,6 +977,7 @@ version 44   // bad for multiple generations
    set docx_hardbreak
    set docx_hardbreak on
    set docx_hardbreak off
+   set docx_maxtable  // added in 15nov2023 update
    set docx_paramode
    set docx_paramode on
    set docx_paramode off
@@ -1200,6 +1201,9 @@ version 44   // bad for multiple generations
 
    set pa
    set pagesize
+
+   set pdf_maxtable  // added in 15nov2023 update
+
 
    // begin obsolete block as of Stata 12, maybe?
    set persistfv on 
@@ -3957,12 +3961,14 @@ set trace off
    /* [M-2] - all the reserved words */
    // these *should* have proper highlighting, but the mata
    //   highlighting is not very sophisticated, yet
+   // These are in [M-2] reswords
    aggregate
    array
 
    boolean
    break /* used elsewhere */
    byte /* used elsewhere */
+
    case
    catch
    class
@@ -3979,9 +3985,7 @@ set trace off
    
    else /* used elsewhere */
    eltypedef
-   mata 
    end // used elsewhere
-
    enum
    explicit
    export
@@ -4003,7 +4007,6 @@ set trace off
    long /* used elsewhere */
 
    mata
-   end // needed for indentation here
    matrix /* used elsewhere */
 
    namespace
@@ -4065,7 +4068,7 @@ version /* used elsewhere */
    /* trying to have some mata stuff */
    pragma unset
    pragma unused
-
+1
    /* from [M-3 Intro] "commands for controlling mata" */
    lmbuild 
 
@@ -4186,6 +4189,12 @@ version /* used elsewhere */
    assert()
    asserteq()
 
+   // added 01jun2022 update to Stata 17
+   base64encode()
+   base64decode()
+   base64encodefile()
+   base64decodefile()
+
    blockdiag()
 
    bufio()
@@ -4282,11 +4291,11 @@ version /* used elsewhere */
    month()
    day()
    year()
-   dow()
    week()
    quarter()
    halfyear()
    doy()
+   dow()
 
    yearly()
    yofd()
@@ -4345,7 +4354,21 @@ version /* used elsewhere */
    now()
    // end new in Stata 17 
    
-
+   // new in Stata 18 (many many)
+   dayssinceweekday()
+   dayssincedow()
+   daysuntilweekday()
+   daysuntildow()
+   firstweekdayofmonth()
+   firstdowofmonth()
+   lastweekdayofmonth()
+   lastdowofmonth()
+   previousweekday()
+   previousdow()
+   nextweekday()
+   nextdow()
+   // end new in Stata 18
+   
    /* end of mata date functions */
    // start of numerical derivatives
    deriv_init()
@@ -4437,6 +4460,7 @@ version /* used elsewhere */
    _docx_table_del_cell()
    _docx_cell_set_colspan()
    _docx_cell_set_rowspan()
+   _docx_set_span()                 // new in Stata 18 
    _docx_table_mod_cell()
    _docx_table_mod_cell_table()
    _docx_table_mod_cell_image()
@@ -4732,6 +4756,8 @@ version /* used elsewhere */
    LA_ZUNGHR()
    // end LAPACK
 
+   ldl()  // new in Stata 17
+   
    // LinearProgram()
    // new in Stata 16
 
@@ -5333,7 +5359,8 @@ version /* used elsewhere */
    // Quadrature fun, new in Stata 16
    // setup
    Quadrature()
-   // definition of problem
+   QuadratureVec()  // new in Stata 18
+   // definition of problem for Quadrature
    q.setEvaluator()
    q.setLimits()
    q.setTechnique()
@@ -5351,6 +5378,9 @@ version /* used elsewhere */
    q.getArgument()
    q.getNarguments()  // new in Stata 17
    q.getTrace()
+   // definition of problem for QuadratureVec
+   // mostly same as above with the following added
+   q.getDimension()
    // integrate
    q.integrate()
    // results
@@ -5507,6 +5537,9 @@ version /* used elsewhere */
 
    sqrt()
 
+   st_addalias()   // new in Stata 18
+   _st_addalias()  // new in Stata 18 
+
    st_addobs()
    _st_addobs()
 
@@ -5547,6 +5580,12 @@ version /* used elsewhere */
    st_global()
    st_global_hcat() // new in Stata 15
 
+   // new in Stata 18
+   st_isalias()
+   st_aliasframe()
+   st_aliaslinkname()
+   st_aliasvarname()
+
    st_isfmt()
    st_isnumfmt()
    st_isstrfmt()
@@ -5576,10 +5615,10 @@ version /* used elsewhere */
    st_eclear()
    st_sclear()
 
-   st_store()
-   st_sstore()
    _st_store()
+   st_store()
    _st_sstore()
+   st_sstore()
 
    st_subview()
 
@@ -5791,15 +5830,28 @@ version /* used elsewhere */
    B.clear_book()
    B.set_mode()
    B.close_book()
-   // Step 3: setting sheet
+   // Step 3: Working with Excel worksheets
    B.add_sheet()
    B.set_sheet()
-   B.set_sheet_gridlines() // new in Stata 14
-   B.set_sheet_merge() // new in Stata 14
+   B.move_sheet()   // new in Stata 18?
    B.clear_sheet()
    B.delete_sheet() // new in Stata 14 
-   B.delete_sheet_merge() // new in Stata 14 
    B.get_sheets()
+   // Step 4: Excel active worksheet settings (most are new in Stata 18)
+   B.set_sheet_gridlines() // new in Stata 14
+   B.set_merge()     // new in Stata 18 
+   B.delete_merge()  // new in Stata 18
+   B.set_split()     // etc.  !! start in fontlock here!
+   B.set_named_range()
+   B.delete_named_range()
+   B.insert_horizontal_page_break()
+   B.delete_horizontal_page_break()
+   B.insert_vertical_page_break()
+   B.delete_vertical_page_break()
+   B.set_header()
+   B.set_footer()
+   B.set_sheet_merge()    // obsolete in Stata 18
+   B.delete_sheet_merge() // new in Stata 14, obsolete in Stata 18 
    // Step 4: reading/writing info
    B.get_string()
    B.get_number()
@@ -5807,7 +5859,8 @@ version /* used elsewhere */
    B.put_string()
    B.put_number()
    B.put_formula() // new in Stata 14
-   B.put_picture() // new in Stata 14 
+   B.put_picture() // new in Stata 14
+   B.put_link()    // new in Stata 18
    B.set_missing()
    // Cell Formatting (new in Stata 14)
    B.set_number_format()
@@ -5838,6 +5891,7 @@ version /* used elsewhere */
    // Formatting Cell Ranges (new in Stata 15)
    B.add_fmtid()
    B.set_fmtid()
+   B.set_column_fmtid()  // new in Stata 18
    B.fmtid_set_number_format()
    B.fmtid_set_vertical_align()
    B.fmtid_set_horizontal_align()
@@ -5857,7 +5911,7 @@ version /* used elsewhere */
    B.fmtid_set_format_lock()
    B.fmtid_set_format_hidden()
    B.add_fontid()
-   B.add_fmtid_set_fontid()
+   B.fmtid_set_fontid()
    B.fontid_set_font()
    B.fontid_set_font_bold()
    B.fontid_set_font_italic()
