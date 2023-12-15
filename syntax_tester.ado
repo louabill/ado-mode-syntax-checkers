@@ -1,4 +1,4 @@
-*! version 1.17.0.1 December 14, 2023 @ 18:25:49
+*! version 1.17.0.1 December 15, 2023 @ 17:36:51
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -6050,7 +6050,7 @@ version /* used elsewhere */
    estat sd
 
    // end of the [META] manual
-
+   
    // the [MI] multiple imputation manual...all new in Stata 11
    // ... and vastly expanded in Stata 12
    mi // incomplete
@@ -6155,6 +6155,7 @@ version /* used elsewhere */
    mi misstabl nest
    mi misstable nested
 
+   mi pas  // incomplete, needs :
    mi pas :
    mi passive:
 
@@ -6177,7 +6178,7 @@ version /* used elsewhere */
    mi reshape wide
 
    mi select init
-   mi select
+   mi select 5
 
    mi set // incomplete
    mi set w
@@ -6229,7 +6230,7 @@ version /* used elsewhere */
    mi xtset
    /* end [MI] multiple imputation */ 
 
-   /* from [MV] multivariate statistics */
+   /* [MV] multivariate statistics */
    alpha
 
    biplot
@@ -6238,23 +6239,35 @@ version /* used elsewhere */
    cam  // not a thing
    camat
 
+   // ca postest
+   estat co
+   estat coordinates
+   estat di
+   estat distances
+   estat in
+   estat inertia
+   estat lo
+   estat loadings
+   estat pr
+   estat profiles
+   estat su
+   estat summarize
+   estat ta
+   estat table
+   // ca post plots
    cabiplot
    caprojection
-   estat coordinates
-   estat distances
-   estat inertia
-   estat loadings
-   estat profiles
-   estat summarize
-   estat table
    screeplot
 
    candisc
 
    canon
 
+   estat cor
    estat correlations
+   estat lo  // manual has loa as min, but earlier it is lo
    estat loadings
+   estat rot
    estat rotate
    estat rotatecompare
    screeplot
@@ -6262,7 +6275,7 @@ version /* used elsewhere */
    /* cluster commands */
    /* now ordered by the manual */
    /* omnibus -cluster- entry ignored */
-
+!!start here !!
    clustermat // incomplete
    clustermat s
    clustermat singlelinkage
@@ -6273,12 +6286,12 @@ version /* used elsewhere */
    clustermat wav
    clustermat waveragelinkage
    clustermat med
-   clustermat `foo' // incomplete --- good? bad?
    clustermat medianlinkage
    clustermat cent
    clustermat centroidlinkage
    clustermat ward
    clustermat wardslinkage
+   clustermat `foo' // incomplete --- good? bad?
    /* end clustermat commands */
 
    cluster // incomplete
@@ -6307,12 +6320,12 @@ version /* used elsewhere */
    cluster wav
    cluster waveragelinkage
    cluster med
-   cluster `foo' // incomplete
    cluster medianlinkage
    cluster cen
    cluster centroidlinkage
    cluster ward
    cluster wardslinkage
+   cluster `foo' // incomplete
 
    cluster not // incomplete
    cluster note
@@ -6349,10 +6362,15 @@ version /* used elsewhere */
    discrim logistic
    discrim qda
    /* discrim estat */
+   estat class
    estat classtable
+   estat err
    estat errorrate
+   estat grs
    estat grsummarize
+   estat li
    estat list
+   estat su
    estat summarize
 
    discrim knn
@@ -6392,9 +6410,12 @@ version /* used elsewhere */
 
    discrim qda
    estat classtable
+   estat corr
    estat correlations
+   estat cov
    estat covariance
    estat errorrate
+   estat grd
    estat grdistances
    estat grsummarize
    estat list
@@ -6409,12 +6430,17 @@ version /* used elsewhere */
    factormat
    /* uh oh, factor estat stuff */
    estat anti
+   estat com
    estat common
+   estat fac
    estat factors
    estat kmo
+   estat res
    estat residuals
+   estat rot
    estat rotatecompare
    estat smc
+   estat str
    estat structure
    estat summarize
    loadingplot
@@ -6440,17 +6466,27 @@ version /* used elsewhere */
    /* mca postestimation */
    mcaplot
    mcaprojection
+   estat co
    estat coordinates
+   estat sub
    estat subinertia
    estat summarize
    screeplot
-
+   // mca postestimation plots
+   mcaplot
+   mcaprojection
+   
    mds
    /* mds postestimation */
+   estat con
    estat config
+   estat cor
    estat correlations
+   estat pair
    estat pairwise
+   estat qua
    estat quantiles
+   estat str
    estat stress
    estat summarize
    mdsconfig
@@ -6464,6 +6500,7 @@ version /* used elsewhere */
 
    mvreg
 
+   // skip mvtest omnibus
    mvtest corr
    mvtest correlations
 
@@ -6488,10 +6525,14 @@ version /* used elsewhere */
    /* pca postestimation */
    estat anti
    estat kmo
+   estat loa  // loa minimum here -lo- elsewhere
    estat loadings
+   estat res
    estat residuals
+   estat rot
    estat rotatecompare
    estat smc
+   estat su
    estat summarize
    loadingplot
    rotate
@@ -6501,7 +6542,9 @@ version /* used elsewhere */
 
    procrustes
    /* procrustes postestimation */
+   estat co
    estat compare
+   estat mv
    estat mvreg
    estat summarize
    procoverlay
