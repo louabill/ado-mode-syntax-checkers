@@ -1,4 +1,4 @@
-*! version 1.17.0.1 December 15, 2023 @ 17:36:51
+*! version 1.17.0.1 December 22, 2023 @ 18:55:26
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -6576,6 +6576,8 @@ version /* used elsewhere */
    end
    program foobar, sclass byable(onecall)
    end
+   pr def grlbk
+   end
 
    cap
    capture
@@ -6708,6 +6710,7 @@ version /* used elsewhere */
    /* oh no! the cclass stuff */
    cret l
    creturn list
+
    /* system values */
    c( current_date )
    c(current_date)
@@ -6720,7 +6723,7 @@ version /* used elsewhere */
    c(born_date)
    c(edition)  // new in Stata 17
    c(edition_real) // new in Stata 17 wtf?
-   c(flavor)
+   c(flavor)  // obsolete in Stata 17 
    c(bit) // new in Stata 12
    c(SE)
    c(MP)
@@ -6792,7 +6795,6 @@ version /* used elsewhere */
 
    /* current dataset */
    c(frame)        // new in Stata 16
-   c(obs_t)        // new in Stata 14, first documented in Stata 16
    c(N)
    c(k)
    c(width)
@@ -6843,7 +6845,9 @@ version /* used elsewhere */
    c(dots)  // new in Stata 16
    c(collect_label)  // new in Stata 17 
    c(collect_style)  // new in Stata 17 
-   c(table_style)    // new in Stata 17 
+   c(table_style)    // new in Stata 17
+   c(etable_style)   // new in Stata 18
+   c(dtable_style)   // new in Stata 18
    c(collect_warn)   // new in Stata 17 
 
    /* interface */
@@ -6855,6 +6859,7 @@ version /* used elsewhere */
    c(persistfv)  // obsolete in Stata 12
    c(persistvtopic) // obsolete in Stata 12
    c(pinnable)
+   c(taskbargroups)  // new in Stata 18 
    c(doublebuffer)
    c(reventries)
    c(fastscroll) // not platform dep in Stata 10, Unix-only in 11
@@ -6936,6 +6941,8 @@ version /* used elsewhere */
    /* putdocx settings, new partway into Stata 16 */
    c(docx_hardbreak)
    c(docx_paramode)
+   c(docx_maxtable)  // new in Stata 18
+   c(pdf_maxtable)   // new in Stata 18
 
    /* python */
    // new in Stata 16
@@ -6969,11 +6976,14 @@ version /* used elsewhere */
    c(emptycells) // new in Stata 12
    c(fvtrack) // new in Stata 15
    c(fvbase)  // new in Stata 16
-   c(haverdir) // new in Stata 13 
+   c(haverdir) // new in Stata 13
+   c(kmp_blocktime)  // new in Stata 18
    c(odbcmgr)
    c(odbcdriver) // new sometime in Stata 14
    c(fredkey) // new in Stata 15
-   c(collect_double) // new in Stata 17 
+   c(collect_double) // new in Stata 17
+   c(dtascomplevel)  // new in Stata 18
+   c(reshape_favor)  // new in Stata 18
    c(`foo')
 
    /* other (uh notsettings?) */
@@ -6984,6 +6994,7 @@ version /* used elsewhere */
    c(Months)
    c(Wdays)
    c(Weekdays)
+   c(obs_t)        // new in Stata 14, first documented in Stata 16
    c(rc)
    "`c(pi)'" 
 
@@ -6991,6 +7002,7 @@ version /* used elsewhere */
    _datasig
    _datasignature
 
+   /* delimit testers start */
 #delimit
 #d cr
 #delimit ;
@@ -7050,6 +7062,8 @@ version /* used elsewhere */
 
 #delimit cr
 
+   /* end delimiter tests */
+   
    /* all the dialog stuff is in syntax_tester.dlg, because the dlg stuff
    should really
    be a separate mode ... ugh */
@@ -7090,7 +7104,6 @@ version /* used elsewhere */
    display in blue    // obsolete in Stata 7[?]
    display in red     // obsolete in Stata 7[?]
    display in yellow  // obsolete in Stata 7[?]
-
 
 
    /* ereturn... */
@@ -7141,6 +7154,7 @@ version /* used elsewhere */
 
    findfile
 
+   /* start of foreach testing */
    foreach bleen // incomplete
    foreach grue in shadows {
       }
@@ -7202,10 +7216,12 @@ version /* used elsewhere */
 
       }
    foreach var of varlist { // should not highlight
-         }
-      
-   program define fooff
+      }
 
+   /* end of foreach testing */
+      
+*   program define fooff
+      
    forv // incomplete
    forvalues bleen // incomplete
    forv fooie=1/4 {
@@ -7230,16 +7246,16 @@ version /* used elsewhere */
    by foo: gettoken (local) bleen (local) bling : how
    nothing good gettoken (local) bleen (local) bling : how // should fail
 
-   if foo fuggy // should fail because of the missing brace 
-   if `this' that // should fail again because of missing brace
+   if foo fuggy   // fails, because the -if exp single command- is nearly unreadable
+   if `this' that // fails for same reason as given above 
    if `those' {
       display "something"
       }
    if foo {
       display "urf"
       }
-   else `fortuna' // should fail: missing right brace
-   else frantabulous // should fail, but perhaps should not
+   else `fortuna' // fails, even though it is legal, see above
+   else frantabulous // fails again, because of readability
    else {
       display "frantabulous"
       }
@@ -7302,69 +7318,86 @@ version /* used elsewhere */
    macro dir
    mac drop // incomplete
    ma drop bleen
-   macro drop 123 // illegal name
+   macro drop 123 // illegal name - should not highlight
    ma l
    macro list
+   mac l booie // does not highlight, though maybe it should
    ma s
    macro shift
 
-   glo fooey : properties
-   globa heha : results    // new in Stata 16
-   glo dingle : ty
-   global dingle : type
-   loc dingle : f
-   local dingle : format
-   gl s : val l fail
-   gl h : val lab
-   global h : value label
-   loc h : var l
-   local h: variable label
-   gl h : data l
+   // macro functions
+   glo foo : properties
+   globa hi: results    // new in Stata 16
+   glo ohmy: ty
+   global t: type
+   loc haha: f
+   local fu: format
+   gl s    : val l somevar
+   gl h    : val lab
+   global h: value label
+   loc h   : var l
+   local h : variable label
+   local no: var beeble // bad
+   gl h    : data l
    global h: data label
-   local h: sort
-   local h: sortedby
-   loc h : lab
+   local  h: sort
+   local  h: sortedby
+   loc   h : lab
    local h : label
-   gl h : constraint
+   gl h    : constraint
    global h: constraint
-   loc h : char
-   local h: char
+   loc h   : char
+   local h : char
+   // alias stuff new in Stata 18
+   gl h    : isalias
+   loc hoho: ty bleen
+   gl nono : alias boo // bad
+   gl frame: aliasf
+   gl frame:aliasframe // need something without a space
+   loc link: aliasl
+   loc link: aliaslinkname
+   glob var: aliasv
+   glob var: aliasvarname
+   // naming vars
    gl h : permname
-   global h : permname
-   local durn: adosubdir "howdy"
-   loc h : dir
-   local h: sysdir
+   global h: permname
+   // files and paths
+   loca durn: adosubdir "howdy"
+   loc h    : dir "hiho" files // no highlighting yet, too complicated
+   local h  : sysdir
    local foo: sysdir STATA
    local foo: sysdir   BASE
    local foo: sysdir SITE
-   global blah: sysdir PLUS
+   glob  foo: sysdir PLUS
    local foo: sysdir PERSONAL
    local bad: sysdir OHNO  // should fail on OHNO
    local hmm: sysdir UPDATE  // technically OK, but not documented
-
-   gl h : env
+   // os stuff
+   gl h     : env
    global h : environment
-   loc h : e(scalars)
+   // stored results
+   loc h   : e(scalars)
    local h : e(macros)
-   gl h: e(matrices)
+   gl h    : e(matrices)
    global h: e(functions)
-   loc h : r(scalars)
+   local no: e(notlegal)  
+   loc h   : r(scalars)
    local h : r(macros)
-   gl h: r(matrices)
+   gl h    : r(matrices)
    global h: r(functions)
-   loc h: s(macros)
-   loc h: s(functions)  // should fail because s(functions) no good
+   loc h   : s(macros)
+   loc h   : s(functions)  // should fail because s(functions) no good
    global h: all globals
    global h: all scalars
-   loc h: all matrices
-   local h: all numeric scalars
-   local h: all string scalars
-   local h: all scalars
-   local h: di
-   local h: display
-   gl h : list
-   global h : rown
-   gl h : rownames
+   loc h   : all matrices
+   local h : all numeric scalars
+   local h : all string scalars
+   // formatting
+   local h : di
+   local h : display
+   gl h    : list
+   global h: rown
+   gl h    : rownames
    local h : coln
    local h :colnames
    local h : rowf
@@ -7391,11 +7424,14 @@ version /* used elsewhere */
    local h : rowlfnames
    local h : collfnames
    // end of new Stata 15 stuff
+   // ts stuff
    glo foo: tsnorm
+   // copying
    local g : copy loc
    local h : copy local
    local h : copy gl
    local b : copy global
+   // parsing
    local h : word // should fail
    local h : word count
    /* maybe should change the number highlight? */
@@ -7423,20 +7459,21 @@ version /* used elsewhere */
    // end obsolete block
 
    /* macro lists */
-   loc foo : list uniq bar
+   loc foo    : list uniq bar
    global foo : list dups bar
-   glob foo: list sort bar
-   loca foo : list retok bar
-   local foo:list retokenize bar
-   glo foo : list clean bar
-   glob foo : list a | b // perhaps operator highlighting would be good
-   globa foo: list c & d
+   glob foo   : list sort bar
+   local uh   : list rsort bleen  // new in Stata 18
+   loca foo   : list retok bar
+   local foo  : list retokenize bar
+   glo foo    : list clean bar
+   glob foo   : list a | b // perhaps operator highlighting would be good
+   globa foo  : list c & d
    global foo : list ding - dong
-   global foo: list this == that
-   global foo: list this === that
-   loc foo: list hey in ho // perhaps 'in' should highlight as operator?
-   local foo: list sizeof hey
-   local foo: list posof "this is something" in hooie
+   global foo : list this == that
+   global foo : list this === that
+   loc foo    : list hey in ho // perhaps 'in' should highlight as operator?
+   local foo  : list sizeof hey
+   local foo  : list posof "this is something" in hooie
 
    /* ahh the macros are over */
 
@@ -7617,6 +7654,7 @@ pause "fuggy"
    set ou e
    set output error
 
+   _retu
    _ret hold
    _retu res
    _retur restore
@@ -7625,6 +7663,7 @@ pause "fuggy"
    _return `foo' // should fail, good? bad?
 
    // return and its relatives
+   retu
    return `foo' // highlights like mata
    ret li
    retu list
@@ -7639,6 +7678,7 @@ pause "fuggy"
    ret add
    return add
 
+   eret
    eretu li
    eretur list
    eret clear
@@ -7664,6 +7704,7 @@ pause "fuggy"
    _rmcoll
    _rmdcoll
 
+   set rmsg
    set r on
    set rmsg on
    set rmsg off
@@ -7676,8 +7717,10 @@ pause "fuggy"
    scalar foo
    scalar di
    scalar dir
+   sca dir _all      // highlight _all?
    sca l
-   sca list 
+   sca list
+   scalar list _all  // highlight _all?
    scalar drop _all
    scalar drop freddy mikey  // oops, mikey should highlight
 
@@ -7719,7 +7762,13 @@ pause "fuggy"
 
    // not going to put legal locale_ui values in
    set locale_ui default   // new in Stata 14 
-   set locale_ui macroman  // new in Stata 14 
+   set locale_ui macroman  // new in Stata 14
+
+   set sortmethod default
+   set sortmethod fsort
+   set sortmethod qsort
+
+   set sortrngstate
 
    signestimationsample
    checkestimationsample
@@ -7761,7 +7810,7 @@ pause "fuggy"
    {cmd}
    {cmd:Go Home!}
    /* hybrid syntax */
-   {cmdab:this:that}
+   {cmdab:it:alic}
 
    /* no checking for bad opt syntax */
    {opt fooey}
@@ -7783,7 +7832,7 @@ pause "fuggy"
 
    /* syntax 2 & 3 */
    {ul on}
-   {ul:is no. 1 in basketball}
+   {ul:is no. 1 in basketball} // sadly no longer true
    {ul off}
    {ul bogus} // should fail
 
@@ -7856,7 +7905,7 @@ pause "fuggy"
    {search_d:fooey}
 
    {dialog hello}
-   {dialog hellp:clickable}
+   {dialog hello:clickable}
    {browse fooey}
    {browse fooey:click}
    {view fooey}
@@ -8062,11 +8111,13 @@ pause "fuggy"
 
    personal
    personal dir
+
    adopath
    // no subcommand highlighting...
    adopath + dingle 
    adopath ++ freeble
    adopath - foo
+
    set a 30
    set adosize 99
 
@@ -8117,12 +8168,14 @@ version   // is allowed by itself
 vers 8
 version 12: fooie
 versi 15: aloha
-versio 23: howdy // should show as blace for a few years
+versio 23: howdy // 23 should show as black for a few years
+
    viewsource
 
    while foo {
       this is some stuff
       }
+
    /* window commands... were moved out of the manual before Stata 9 */
    /* put back in the manual in Stata 13 */
    /* platform dependencies not highlighted */
@@ -8147,8 +8200,10 @@ versio 23: howdy // should show as blace for a few years
    windo manag maintitle reset // unix and windows
    windo mana docklabel // mac only 
    window man forward // incomplete
+   window manage forward browser   // new in Stata 18
    window manage forward command
    window manage forward doeditor
+   window manage forward editor    // new in Stata 18
    window manage forward graph
    window manage forward help
    window manage forward history   // new in Stata 16 
@@ -8184,6 +8239,7 @@ versio 23: howdy // should show as blace for a few years
    window menu append   string
    // end obsolete block 
 
+   win push
    window push
 
    windo stop // incomplete
