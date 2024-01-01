@@ -1,4 +1,4 @@
-*! version 1.17.0.1 December 22, 2023 @ 18:55:26
+*! version 1.17.0.1 December 31, 2023 @ 19:52:15
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8309,6 +8309,7 @@ versio 23: howdy // 23 should show as black for a few years
 
    ciwidth
    ciwidth usermethod // fix?
+
    ciwidth onemean
    
    ciwidth twomeans
@@ -8366,8 +8367,8 @@ versio 23: howdy // 23 should show as black for a few years
    <<dd_graph: replace>>
    <<dd_graph: gr()>>
    <<dd_graph: graphname()>>
-   <<dd_gra: svg >>
-   <<dd_grap: png >>
+   <<dd_gra:   svg >>
+   <<dd_grap:  png >>
    <<dd_graph: pdf eps ps html markd markdown >>
    <<dd_graph: path pathonly>>
    <<dd_graph: alt() >>
@@ -8375,6 +8376,7 @@ versio 23: howdy // 23 should show as black for a few years
    <<dd_graph: w() width() >>
    <<dd_graph: rel relative>>
    <<dd_graph: abs absolut>>
+   <<dd_gr:    basepath()>>
    <<dd_graph: nourl nourlencode>>
 
    <<dd_include>> // should fail
@@ -8434,10 +8436,12 @@ versio 23: howdy // 23 should show as black for a few years
 
    putdocx table
    putdocx describe
+   set docx_maxtable
 
    // putexcel new in Stata 13; syntax changes don't change ado-mode
    // not sure how putexcel is a reporting command, but still....
    putexcel
+   putexcel sheetset    // new in Stata 18
    putexcel set
    putexcel save
    putexcel describe
@@ -8449,6 +8453,8 @@ versio 23: howdy // 23 should show as black for a few years
    putpdf save
    putpdf clear
 
+   putpdf collect
+
    putpdf pagebreak
    putpdf sectionbreak
 
@@ -8459,6 +8465,7 @@ versio 23: howdy // 23 should show as black for a few years
    putpdf table
    putpdf append // should fail; not legal
    putpdf describe
+   set pdf_maxtable
 
    set docx_hardbreak on
    set docx_hardbreak off
