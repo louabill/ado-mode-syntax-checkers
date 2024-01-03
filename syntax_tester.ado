@@ -1,4 +1,4 @@
-*! version 1.17.0.1 January 3, 2024 @ 10:00:07
+*! version 1.18.0.0 January 3, 2024 @ 10:42:10
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -9090,8 +9090,12 @@ versio 23: howdy // 23 should show as black for a few years
    irf // incomplete 
    psdensity
 
+   arfimasoc   // new in Stata 18
+
    arima
    estat aroots
+
+   arimasoc   // new in Stata 18
 
    corrgram
    ac
@@ -9170,7 +9174,7 @@ versio 23: howdy // 23 should show as black for a few years
    // end obsolete block
 
    /* irf commands ... starting Stata 8.2 */
-   // skipping irf section
+   // skipping omnibus irf section
    irf        // incomplete 
    irf graph  // incomplete 
    irf `foo'  // incomplete 
@@ -9233,6 +9237,8 @@ versio 23: howdy // 23 should show as black for a few years
    irf tab sirf
    irf tab sfevd
    irf tab foo // should fail: foo not legal
+
+   lpirf       // new in Stata 18
 
    // mgarch section skipped
    mgarch  // incomplete 
@@ -9307,6 +9313,7 @@ versio 23: howdy // 23 should show as black for a few years
 
    tsset
 
+   // skip tssmooth omnibus
    tssmooth   // incomplete 
    tssmooth `foo'  // should fail good? bad?
    tssmooth breeble // should fail; breeble no good
@@ -9371,7 +9378,7 @@ versio 23: howdy // 23 should show as black for a few years
    vecnorm
    vecstable
    // end vec postestimation commands
-   // now they show up again explicitly with an extra
+   // now they show up again explicitly as sections
    veclmar
 
    vecnorm
@@ -9418,19 +9425,19 @@ versio 23: howdy // 23 should show as black for a few years
    xtdes
    xtdescribe
 
-   xtdidregress // new in Stata 17
+   xtdidregress // new in Stata 17, documented in [CAUSAL]
 
    xtdpd
 
    xtdpdsys
 
-   xteintreg   // new in Stata 16
+   xteintreg   // new in Stata 16, documented in [CAUSAL]
 
-   xteoprobit  // new in Stata 16
+   xteoprobit  // new in Stata 16, documented in [CAUSAL]
 
-   xteprobit   // new in Stata 16
+   xteprobit   // new in Stata 16, documented in [CAUSAL]
 
-   xteregress  // new in Stata 15 
+   xteregress  // new in Stata 15, documented in [CAUSAL]
 
    xtfrontier
 
@@ -9442,6 +9449,8 @@ versio 23: howdy // 23 should show as black for a few years
 
    xthaus // obsolete in Stata 9
 
+   xthdidregress twfe  // documented in [CAUSAL] in Stata 18
+   
    xtheckman   // new in Stata 16
 
    xthtaylor
@@ -9461,6 +9470,7 @@ versio 23: howdy // 23 should show as black for a few years
    // end obsolete block
 
    xtmlogit  // new in Stata 17
+   estat sd
 
    xtnbreg
 
@@ -9479,7 +9489,6 @@ versio 23: howdy // 23 should show as black for a few years
    xtrc
 
    xtreg
-
    xttest0  // postestimation command
 
    xtregar
