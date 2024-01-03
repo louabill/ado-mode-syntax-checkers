@@ -1,4 +1,4 @@
-*! version 1.17.0.1 December 31, 2023 @ 19:52:15
+*! version 1.17.0.1 January 3, 2024 @ 10:00:07
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -8527,6 +8527,9 @@ versio 23: howdy // 23 should show as black for a few years
    gsem
    sem
 
+   lincom
+   nlcom
+   
    // this is not as ornate as it could be
    ssd  // incomplete
    ssd init
@@ -8619,6 +8622,8 @@ versio 23: howdy // 23 should show as black for a few years
    ctset
    cttost
 
+   estat gofplot
+
    ltable
 
    snapspan
@@ -8693,13 +8698,15 @@ versio 23: howdy // 23 should show as black for a few years
    stpowe exponential
    stpower log
    stpower logrank
-   // end obsolete block 
+   // end obsolete block
+
+   stmc
+
+   stmh
 
    stptime
 
    strate
-   stmh
-   stmc
 
    streg
    /* skip over sts entry */
@@ -8750,14 +8757,31 @@ versio 23: howdy // 23 should show as black for a few years
    estat gof
    estat vce
    /* end estat commands */
-   /* all the -svy whatever- come after the allowable estimation commands */
-   /* survey commands as listed in the order of the survey estimation section */
-   brr
+
+
+   // brr here because of [svy] 
+   svy brr: logistic
+   brr: logistic
+
+   // the prefix commands, in order of -svy- syntax section ugh
+   svy linear: gnbreg
+   svy linearized: regress
+   svy bootstrap: logistic
+   svy brr: gnbreg
+   svy jack: logistic
+   svy jackknife: regress
+   svy sdr: regress // added in Stata 11.1
+   sdr: regress // added in Stata 11.1
+
+   /* all the allowable estimation commands in the order of the
+      Description subsection of the svy estimation section
+   */
 
    // descriptive
    svy: mean
    svy: proportion
    svy: ratio
+   svy: tabulate
    svy: total
    // linear regression
    svy: churdle 
@@ -8822,6 +8846,7 @@ versio 23: howdy // 23 should show as black for a few years
    svy: ztnb // obsolete in Stata 11 ?
    svy: ztb  // obsolete in Stata 11 ?
    // iv regression models
+   svy: ivfprobit
    svy: ivprobit
    svy: ivregress
    svy: ivtobit
@@ -8877,17 +8902,11 @@ versio 23: howdy // 23 should show as black for a few years
    svy: irt rsm
    svy: irt hybrid
 
-   // the prefix commands
-   svy jack: logistic
-   svy jackknife: regress
-   svy linear: gnbreg
-   svy bootstrap: logistic
-   svy brr: gnbreg
-   brr: irt 1pl 
-   svy sdr: regress // added in Stata 11.1
-   sdr: regress // added in Stata 11.1
-
+   // still following this insane manual ordering
    svy jack: fmm: ologit // works in an odd way
+
+   svy sdr: regress
+   sdr: regress
 
    svy jack: // incomplete
    svy       // incomplete
@@ -8897,6 +8916,7 @@ versio 23: howdy // 23 should show as black for a few years
    svy: tab
    svy: tabul
    svy: tabulate
+   svy brr: tab
 
    svydes  // abbreviation undocumented in Stata 16
    svydescribe
@@ -8906,12 +8926,14 @@ versio 23: howdy // 23 should show as black for a few years
 
    /* end of the [SVY] survey stats book */
 
-   // Start of [TABLE], new in Stata 17
+   // Start of [TABLES], new in Stata 17
    collect      // incomplete
    collect:     // should be OK
    collect:     // OK< also
    collect get  // will be OK one way or another
    collect get  // lack of colon only when using -get-
+
+   collect addtags  // new in Stata 18
 
    collect clear
 
@@ -8943,6 +8965,21 @@ versio 23: howdy // 23 should show as black for a few years
    collect levels
    collect levelsof
 
+   collect notes     // new in Stata 18
+
+   // collect query new at some point in Stata 17
+   // some subcommands added in 17nov2021 update
+   collect query // incomplete
+   collect query autolevels
+   collect query row
+   collect query column
+   collect query table
+   collect query header
+   collect query html
+   collect query putdocx
+   collect query putpdf
+   collect query tex
+
    collect recode
 
    collect remap
@@ -8954,6 +8991,8 @@ versio 23: howdy // 23 should show as black for a few years
    collect set
 
    collect stars
+
+   collect title   // new in 17nov2021 update
 
    collect use
 
@@ -8977,6 +9016,8 @@ versio 23: howdy // 23 should show as black for a few years
    collect style header
 
    collect style html
+
+   collect style notes  // new in 17nov2021 update
 
    collect style putdocx
 
@@ -9003,6 +9044,10 @@ versio 23: howdy // 23 should show as black for a few years
 
    collect style table
 
+   collect style tex   // new in 17nov2021 update
+
+   collect style title  // new in 17nov2021 update
+
    collect style use
 
    // uh oh, -set- commands not listed under -set- section
@@ -9023,9 +9068,17 @@ versio 23: howdy // 23 should show as black for a few years
    set collect_warn on
    set collect_warn wtf // bad
 
+   // new in Stata 18 
+   set dtable_style dtable
+   set dtable_style <anything>
+
+   // new in Stata 18 
+   set etable_style etable
+   set etable_style <anything>
+
    set table_style <anything>
    set table_style table
-   // end [TABLE]
+   // end [TABLES]
 
 
    /* [TS] time series */
