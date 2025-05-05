@@ -1,4 +1,4 @@
-*! version 1.18.0.0 January 3, 2024 @ 10:42:10
+*! version 1.18.5.0 December 16, 2024 @ 14:49:14
 *! doesn't do anything; made for syntax testing
 *! also used as a base to generate keywords for auto-completion
 program def syntax_tester, eclass
@@ -92,6 +92,8 @@ version 17
 version 17.0
 version 17.1 // bad
 version 18
+version 18.5
+version 18.8 // bad
 version 19   // bad for awhile
 version 44   // bad for multiple generations
 
@@ -1744,6 +1746,7 @@ set trace off
    estat vce // areg
    vif // obsolete in Stata 9 
    estat vif // anova regress
+   estat weakrobust  // ivregress, new in StataNow 18.5
 
 
    /* end subcommand using postestimation */
@@ -1770,6 +1773,8 @@ set trace off
 
    /* was the bayes prefix from Stata 14 */
    bayesmh
+
+   bayesselect  // new in 18.5 16oct2024 update
 
    // Bayesian postestimation not separated out here, because all commands
    //   have their own documentation
@@ -2453,6 +2458,8 @@ set trace off
 
    import hav
    import haver
+
+   import haverdirect
    // there is no exporting of haver analytics files!
    export hav
    export haver
@@ -4382,6 +4389,8 @@ version /* used elsewhere */
    deriv_init_scale()
    deriv_init_bounds()
    deriv_init_search()
+   deriv_init_usemin()     // new in Stata 18 14feb2024 update  
+   deriv_init_min()        // new in Stata 18 14feb2024 update
    deriv_init_verbose()
 
    deriv()
@@ -4927,6 +4936,8 @@ version /* used elsewhere */
    moptimize_init_trace_Hessian()
    moptimize_init_evaluations()
    moptimize_init_verbose()
+   moptimize_init_deriv_min()     // new in Stata 18 update 14feb2024
+   moptimize_init_deriv_usemin()  // new in Stata 18 update 14feb2024
    // Step 3 functions
    moptimize()
    _moptimize()
@@ -5169,6 +5180,8 @@ version /* used elsewhere */
    optimize_init_evaluations()
    optimize_init_constraints()
    optimize_init_verbose()
+   optimize_init_deriv_usemin() // new in Stata 18 update 14feb2024
+   optimize_init_deriv_min()    // new in Stata 18 update 14feb2024
 
    optimize()
    _optimize()
@@ -9238,6 +9251,8 @@ versio 23: howdy // 23 should show as black for a few years
    irf tab sfevd
    irf tab foo // should fail: foo not legal
 
+   ivlpirf     // new in 16oct2024 update (18.5)
+
    lpirf       // new in Stata 18
 
    // mgarch section skipped
@@ -9352,6 +9367,11 @@ versio 23: howdy // 23 should show as black for a few years
    varstable
    varwle
    /* end var post estimation commands */
+
+   // ivsvar new in StataNow 18.5
+   ivsvar  // incomplete
+   ivsvar gmm
+   ivsvar mdist
 
    svar
 
@@ -9490,6 +9510,7 @@ versio 23: howdy // 23 should show as black for a few years
 
    xtreg
    xttest0  // postestimation command
+   estat mundlak  // new in Stata 18.5, 25jun2024 update
 
    xtregar
 
@@ -9512,6 +9533,8 @@ versio 23: howdy // 23 should show as black for a few years
    xtunitroot ips
    xtunitroot fisher
    xtunitroot hadri
+
+   xtvar     // new in Stata 18.5
 
    /* end stuff from [XT] */
 
